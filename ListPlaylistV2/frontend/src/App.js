@@ -1,8 +1,8 @@
 import React from 'react';
 import NavigationBar from './components/header/navbar';
 import headphones from './assets/images/headphones.svg';
-import spotifyLogo from './assets/images/spotify-logo.svg';
-import googleLogo from './assets/images/google-logo.svg';
+import spotifyLogo from './assets/images/spotify-logo.png';
+import googleLogo from './assets/images/google-logo.png';
 
 function App() {
     return (
@@ -29,7 +29,7 @@ function App() {
                                 <button className="spotify login-btn">
                                     <img
                                         src={spotifyLogo}
-                                        alt="google-logo"
+                                        alt="spotify-logo"
                                         className="spotify-img"
                                     />
                                     <span>Login with Spotify</span>
@@ -38,7 +38,7 @@ function App() {
                                 <button className="google login-btn">
                                     <img
                                         src={googleLogo}
-                                        alt="spotify-logo"
+                                        alt="google-logo"
                                         className="google-img"
                                     />
                                     <span>Login with Google</span>

@@ -130,6 +130,8 @@ main {
 .google-img,
 .spotify-img {
     margin-left: -5%;
+    max-width: 20%;
+    margin: auto 0;
 }
 
 @media (max-width: 1035px) {
