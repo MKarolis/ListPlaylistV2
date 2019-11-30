@@ -17,21 +17,22 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="frontend\.idea\**" />
+    <Compile Remove="frontend\frontend\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="frontend\.idea\**" />
+    <Content Remove="frontend\frontend\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="frontend\.idea\%24PRODUCT_WORKSPACE_FILE%24" />
-    <None Include="frontend\.idea\.gitignore" />
-    <None Include="frontend\.idea\frontend.iml" />
-    <None Include="frontend\.idea\inspectionProfiles\Project_Default.xml" />
-    <None Include="frontend\.idea\misc.xml" />
-    <None Include="frontend\.idea\modules.xml" />
-    <None Include="frontend\.idea\vcs.xml" />
-    <None Include="frontend\.idea\workspace.xml" />
-    <None Include="frontend\frontend\.idea\inspectionProfiles\Project_Default.xml" />
-    <None Include="frontend\frontend\.idea\workspace.xml" />
+    <EmbeddedResource Remove="frontend\.idea\**" />
+    <EmbeddedResource Remove="frontend\frontend\**" />
+    <None Remove="frontend\.idea\**" />
+    <None Remove="frontend\frontend\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="frontend\package-lock.json" />
     <None Include="frontend\package.json" />
     <None Include="frontend\public\manifest.json" />
