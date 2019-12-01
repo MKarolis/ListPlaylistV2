@@ -1,7 +1,8 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import NavigationBar from './components/header/navbar';
-import Home from './components/Home';
+import NavigationBar from '../../components/Navbar/Navbar';
+import Home from '../Home/Home';
+import './App.css';
 
 const NotFound = () => (<div><h1>NotFound</h1></div>);
 

@@ -1,0 +1,84 @@
+﻿.welcome-text {
+    margin-top: 6.5%;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4vw;
+    line-height: 4.2vw;
+    letter-spacing: 0.05em;
+    color: #edf5e1;
+    text-align: left;
+}
+
+.headphones-img {
+    width: 32vw;
+    height: auto;
+}
+
+/* Button styling (relevant if we were to make a seperate component) */
+.login-button-container {
+    display: flex;
+    justify-content: space-between;
+    height: 40%;
+    flex-wrap: wrap;
+}
+
+.login-btn {
+    width: 230px;
+    height: 59px;
+    border-radius: 30px;
+    display: flex;
+    background-color: #05386b;
+    color: #edf5e1;
+    border: none;
+    justify-content: space-evenly;
+    margin-top: 2vw;
+    transition: all 0.25s ease-out;
+}
+
+    .login-btn:hover {
+        transform: scale(1.15);
+        opacity: 0.9;
+    }
+
+.login-button-container .google {
+    margin-left: 2vw;
+}
+
+.login-btn:focus {
+    outline: 0;
+}
+
+.login-btn span {
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-self: center;
+    letter-spacing: 0.05em;
+}
+
+.google-img,
+.spotify-img {
+    margin-left: -5%;
+    max-width: 20%;
+    margin: auto 0;
+}
+
+@media (max-width: 768px) {
+    .welcome-text {
+        text-align: center;
+        font-size: 7vw;
+        padding: 5vw;
+        line-height: 9.2vw;
+    }
+
+    .login-button-container {
+        flex-direction: column-reverse;
+        justify-content: center;
+        margin: auto;
+    }
+
+    .login-btn {
+        margin-top: 4vw;
+    }
+}

@@ -1,8 +1,9 @@
 ﻿import React from 'react';
-import headphones from '../assets/images/headphones.svg';
-import spotifyLogo from '../assets/images/spotify-logo.png';
-import googleLogo from '../assets/images/google-logo.png';
+import headphones from '../../assets/images/headphones.svg';
+import spotifyLogo from '../../assets/images/spotify-logo.png';
+import googleLogo from '../../assets/images/google-logo.png';
 import { connect } from 'react-redux';
+import './Home.css';
 
 class Home extends React.Component {
     constructor(props) {
