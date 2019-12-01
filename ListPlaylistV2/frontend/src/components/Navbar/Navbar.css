@@ -1,0 +1,27 @@
+﻿.navbar-brand,
+.navbar-nav .nav-link {
+    color: #05386b;
+}
+
+.navbar-text.logged-in-as-label {
+    color: #05386B;
+    font-weight: 500;
+    font-size: 24px;
+    cursor: default;
+    position: absolute;
+    right: 5%;
+}
+
+.logo {
+    margin-left: 2vw;
+    min-width: 150px;
+    width: 11vw;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .navbar-text.logged-in-as-label {
+        max-width: 40%;
+        font-size: 16px;
+    }
+}
