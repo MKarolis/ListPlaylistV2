@@ -2,6 +2,7 @@
 import headphones from '../assets/images/headphones.svg';
 import spotifyLogo from '../assets/images/spotify-logo.png';
 import googleLogo from '../assets/images/google-logo.png';
+import { connect } from 'react-redux';
 
 class Home extends React.Component {
     constructor(props) {
@@ -9,8 +10,10 @@ class Home extends React.Component {
     }
 
     render() {
+        const { googleUser } = this.props;
         return (
-        <div className="row">
+            <div className="row">
+                {googleUser}
             <div className="col d-none d-md-block">
                 <img
                     src={headphones}
@@ -52,4 +55,10 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+const mapStateToProps = (state) => ({
+    googleUser: state.googleUser
+});
+
+//export default Home;
+
+export default connect(mapStateToProps)(Home);
