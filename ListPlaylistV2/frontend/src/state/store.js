@@ -1,15 +1,7 @@
-﻿import rootReducer from './reducers/rootReducer';
-import { createStore, applyMiddleware } from 'redux';
+﻿import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from './reducers/authReducer';
+import reducers from './reducers';
 
-let initialAuthState = {
-    authenticatedWithGoogle: false,
-    authenticatedWithSpotify: false,
-    googleUser: 'USERIS',
-    spotigyUser: ''
-}
-
-const store = createStore(authReducer, initialAuthState, applyMiddleware(thunk));
+const store = createStore(reducers, applyMiddleware(thunk));
 
 export default store;
