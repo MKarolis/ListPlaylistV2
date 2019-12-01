@@ -1,4 +1,4 @@
-﻿
+﻿import { LOGIN } from './authenticationActionTypes';
 export const loginWithGoogle = (token) => {
     return dispatch => {
         dispatch({
