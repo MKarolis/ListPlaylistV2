@@ -1,0 +1,28 @@
+queries
+
+create TABLE youtube
+(
+id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+youtube_username varchar(30),
+access_token varchar(40),
+expires_on timestamp,
+playlists JSON
+);
+
+create TABLE spotify
+(
+id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+spotify_username varchar(30),
+access_token varchar(40),
+expires_on timestamp,
+playlists JSON
+);
+
+create TABLE users
+(
+id bigint UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+youtube_id bigint UNSIGNED,
+spotify_id bigint UNSIGNED,
+FOREIGN KEY (youtube_id) REFERENCES youtube(id),
+FOREIGN KEY (spotify_id) REFERENCES youtube(id)
+);
