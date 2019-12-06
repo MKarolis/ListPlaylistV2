@@ -1,0 +1,16 @@
+@import '~antd/dist/antd.css';
+
+.spotify-table {
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	width: 740px;
+	height: 349px;
+}
+
+@media (max-width: 1035px) {
+	.spotify-table {
+		width: 70%;
+	}
+}
