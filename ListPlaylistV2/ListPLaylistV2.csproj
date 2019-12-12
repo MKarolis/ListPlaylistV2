@@ -8,6 +8,7 @@
     <SpaRoot>frontend\</SpaRoot>
     <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <UserSecretsId>84088c9b-6531-4d9d-8695-41537784a828</UserSecretsId>
   </PropertyGroup>
   
   <ItemGroup>
