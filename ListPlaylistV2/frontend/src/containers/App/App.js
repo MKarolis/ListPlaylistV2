@@ -8,7 +8,8 @@ import './App.css';
 
 const NotFound = () => (
 	<div>
-		<h1>NotFound</h1>
+		<h1>404</h1>
+		<h1>Page Not Found</h1>
 	</div>
 );
 

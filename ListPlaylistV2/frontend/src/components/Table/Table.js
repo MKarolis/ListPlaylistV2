@@ -33,17 +33,7 @@ function getPlaylists() {
 		.catch(err => console.log(err));
 }
 
-// //User_id gaunam kaip prop
-// fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
-// 	headers: {
-// 		Authorization: 'Bearer ' + accessToken
-// 	}
-// 	//returns response as json
-// })
-// 	.then(response => response.json())
-// 	.then(data => this.setState);
 
-//This should be retrieved from the api
 const columns = [
 	{
 		title: 'Name',
@@ -59,6 +49,8 @@ const columns = [
 		dataIndex: 'address'
 	}
 ];
+
+//This should be retrieved from the api "get user playlists" and passed to the component as a prop
 const data = [
 	{
 		key: '1',
