@@ -2,6 +2,46 @@ import React from 'react';
 import './Table.css';
 import { Table } from 'antd';
 // import logo from './../../assets/images/spotify-logo.svg';
+import axios from 'axios';
+
+const me = 'nzwazeib4qbxbmx6p1xajlxei';
+const user_id = me;
+var token =
+	'Bearer BQAfHx28I8YrUHXB7KBoheJUzOXuFMDCcqXwbRLFtZ6iCcpTtZqh3_6G4Tzc1xEL3UXUcO_IoNoGdvaUP-1ON_tNB26aJMFQ-qpB_6lEplb9XCjPQckXazFiYJkWasZR3CRFXNNRjn-BuC23FOWVlDSgtfAl68EUjVfVXFkzTTG3CzY';
+var request = require('request');
+var playlist_url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
+var test_url = 'https://jsonplaceholder.typicode.com/todos';
+
+// export class SpotifyTable extends React.Component {
+// 		state = {
+// 			playlists: []
+// 		};
+// 	}
+// 	componentDidMount() {
+// 		axios.get(test_url).then(res => {
+// 			//sets playlists to response data (whatever was returned from the url)
+// 			console.log(this.playlists);
+// 			this.setState({ playlists: res.data });
+// 		});
+// 	}
+function getPlaylists() {
+	axios({
+		method: 'get',
+		url: test_url
+	})
+		.then(res => console.log(res))
+		.catch(err => console.log(err));
+}
+
+// //User_id gaunam kaip prop
+// fetch(`https://api.spotify.com/v1/users/${user_id}/playlists`, {
+// 	headers: {
+// 		Authorization: 'Bearer ' + accessToken
+// 	}
+// 	//returns response as json
+// })
+// 	.then(response => response.json())
+// 	.then(data => this.setState);
 
 //This should be retrieved from the api
 const columns = [
