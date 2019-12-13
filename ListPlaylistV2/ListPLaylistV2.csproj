@@ -12,7 +12,8 @@
   </PropertyGroup>
   
   <ItemGroup>
-    <PackageReference Include="Google.Apis.Auth" Version="1.42.0" />    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
+    <PackageReference Include="Google.Apis.Auth" Version="1.42.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />    <PackageReference Include="Microsoft.AspNetCore.Mvc.RazorPages" Version="2.2.5" />
 
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
 

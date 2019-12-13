@@ -3,18 +3,24 @@ import headphones from '../../assets/images/headphones.svg';
 import spotifyLogo from '../../assets/images/spotify-logo.png';
 import googleLogo from '../../assets/images/google-logo.png';
 import { connect } from 'react-redux';
+import GoogleLogin from "react-google-login";
 import './Home.css';
 
 class Home extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.responseGoogle = this.responseGoogle.bind(this);
+	}
+
+	responseGoogle = (response) => {
+		console.log(response);
 	}
 
 	render() {
-		const { googleUser } = this.props;
 		return (
+
 			<div className="row">
-				{googleUser}
 				<div className="col d-none d-md-block">
 					<img
 						src={headphones}
@@ -41,7 +47,7 @@ class Home extends React.Component {
 								/>
 								<span>Login with Spotify</span>
 							</button>
-
+							<GoogleLogin onSuccess={this.responseGoogle} onFailure={this.responseGoogle} clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID} />
 							<button className="google login-btn">
 								<img
 									src={googleLogo}

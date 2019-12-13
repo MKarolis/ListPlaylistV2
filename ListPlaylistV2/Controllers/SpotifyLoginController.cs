@@ -16,7 +16,7 @@ namespace dotnet_core_spotify_authentication.Controllers
         public string redirectURL = "https://localhost:44339/convert";
     }
     //dar reik nustatyt route
-    [Route("href")]
+    [Route("api/login/spotify")]
     public class SpotifyController : Controller
     {
         SpotifyAuthentication sAuth = new SpotifyAuthentication();
