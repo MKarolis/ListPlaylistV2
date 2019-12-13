@@ -47,15 +47,24 @@ class Home extends React.Component {
 								/>
 								<span>Login with Spotify</span>
 							</button>
-							<GoogleLogin onSuccess={this.responseGoogle} onFailure={this.responseGoogle} clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID} />
-							<button className="google login-btn">
-								<img
-									src={googleLogo}
-									alt="google-logo"
-									className="google-img"
-								/>
-								<span>Login with Google</span>
-							</button>
+							<GoogleLogin
+								clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
+								render={renderProps => (
+									<button onClick={renderProps.onClick} disabled={renderProps.disabled} className="google login-btn">
+										<img
+											src={googleLogo}
+											alt="google-logo"
+											className="google-img"
+										/>
+										<span>Login with Google</span>
+									</button>
+
+								)}
+								buttonText="Login"
+								onSuccess={this.responseGoogle}
+								onFailure={this.responseGoogle}
+							/>
+
 						</div>
 					</div>
 				</div>
