@@ -15,23 +15,28 @@ namespace dotnet_core_spotify_authentication.Controllers
         public string clientSecret = "a67d3cd31a2d4874930516d56c1eaf9b";
         public string redirectURL = "https://localhost:44339/convert";
     }
-    //dar reik nustatyt route
-    [Route("href")]
+
+    [Route("api/v1/spotify/login/")]
     public class SpotifyController : Controller
     {
         SpotifyAuthentication sAuth = new SpotifyAuthentication();
 
-        [HttpGet]
+        [HttpGet("/")]
         public ContentResult Get()
         {
             var qb = new QueryBuilder();
             qb.Add("response_type", "code");
             qb.Add("client_id", sAuth.clientID);
-            qb.Add("scope", "user-read-private user-read-email");
+            qb.Add("scope", "user-read-private " +
+                            "user-read-email " +
+                            "playlist-read-private" +
+                            "playlist-read-collaborative" + // User's playlist, editable publicly
+                            "playlist-modify-private" + 
+                            "playlist-modify-public");
             qb.Add("redirect_uri", sAuth.redirectURL);
 
             //reiktu pridet anchor prie spotify-login btn
-            //<a href=""https://accounts.spotify.com/authorize/" + qb.ToQueryString().ToString() + @"""><button>Authenticate at Spotify</button></a>
+            //<a href="https://accounts.spotify.com/authorize/" + qb.ToQueryString().ToString() + @"""><button>Authenticate at Spotify</button></a>
             return new ContentResult
             {
                 ContentType = "application/json",
