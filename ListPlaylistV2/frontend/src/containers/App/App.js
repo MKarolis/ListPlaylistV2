@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from '../../components/Navbar/Navbar';
 import Home from '../Home/Home';
+import SourceSelect from '../SourceSelect/SourceSelect';
 import './App.css';
 
 const NotFound = () => (<div><h1>NotFound</h1></div>);
@@ -14,6 +15,7 @@ function App(props) {
                 <Router history={props.history}> 
                     <Switch>
                         <Route exact path='/' component={Home} />
+                        <Route path='/source-select' component={SourceSelect} />
                         <Route component={NotFound} />
                     </Switch> 
                 </Router>

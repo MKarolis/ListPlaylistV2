@@ -60,6 +60,4 @@ const mapStateToProps = (state) => ({
     googleUser: state.googleUser
 });
 
-//export default Home;
-
 export default connect(mapStateToProps)(Home);
