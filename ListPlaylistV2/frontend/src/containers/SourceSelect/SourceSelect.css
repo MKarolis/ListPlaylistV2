@@ -1,1 +1,19 @@
-﻿
+﻿.spotify-logo-blue,
+.youtube-logo-blue {
+	max-width: 500px;
+	min-width: 200px;
+	height: auto;
+}
+.youtube-logo-blue {
+	padding-left: 3rem;
+}
+.spotify-logo-blue {
+	padding-right: 3rem;
+}
+
+@media (max-width: 767px) {
+	.youtube-logo-blue,
+	.youtube-logo-blue {
+		padding: 0 !important;
+	}
+}
