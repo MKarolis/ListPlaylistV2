@@ -6,8 +6,8 @@
 let initialState = {
     authenticatedWithGoogle: false,
     authenticatedWithSpotify: false,
-    googleUser: '',
-    spotifyUser: '',
+    googleUserName: '',
+    spotifyUserName: '',
 }
 
 const authenticationReducer = (state = initialState, action) => {
@@ -15,25 +15,25 @@ const authenticationReducer = (state = initialState, action) => {
         case LOGIN_GOOGLE:
             return {
                 ...state,
-                googleUser: action.payload,
+                googleUserName: action.payload,
                 authenticatedWithGoogle: true,
             };
         case LOGOUT_GOOGLE:
             return {
                 ...state,
-                googleUser: null,
+                googleUserName: null,
                 authenticatedWithGoogle: false,
             };
         case LOGIN_SPOTIFY:
             return {
                 ...state,
-                spotifyUser: action.payload,
+                spotifyUserName: action.payload,
                 authenticatedWithSpotify: true,
             };
         case LOGOUT_SPOTIFY:
             return {
                 ...state,
-                spotifyUser: null,
+                spotifyUserName: null,
                 authenticatedWithSpotify: false,
             };
         default:
@@ -41,7 +41,7 @@ const authenticationReducer = (state = initialState, action) => {
                 ...state,
             };
     }
-    
+
     return state;
 }
 
