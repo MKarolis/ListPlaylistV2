@@ -2,28 +2,72 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SpotifyAPI.Web;
+using SpotifyAPI.Web.Models;
+using SpotifyAPI.Web.Auth;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using Unosquare.Swan;
+using ListPLaylistV2.Models.Spotify.Mappers;
+
 
 namespace ListPLaylistV2.Controllers.Spotify
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class SpotifyController : ControllerBase
+    // [Route("spotify/")]
+    // [ApiController]
+    public class SpotifyController : Controller
     {
-        // GET: api/Spotify
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private SpotifyWebAPI _spotify;
+
+        // [HttpGet("/")]
+        public String GetIndex([FromHeader] string input)
         {
-            return new string[] { "value1", "value2" };
+            return input;
+        }
+        
+        // GET: api/Spotify
+        // [HttpGet("/playlists")]
+        // [Authorize]
+        public IActionResult GetPlaylists([FromHeader] string accessToken, [FromHeader] string tokenType)
+        {
+            _spotify = new SpotifyWebAPI()
+            {
+                AccessToken = accessToken,
+                TokenType = tokenType // Always "Bearer"
+            };
+
+            String userId = _spotify.GetPrivateProfileAsync().Result.Id;
+
+            Task<Paging<SimplePlaylist>> playlists = _spotify.GetUserPlaylistsAsync(userId);
+
+            if (playlists.Await().HasError())
+                return BadRequest(playlists.Exception.Message);
+
+            return Ok(Json(playlists.Result.Items));
         }
 
-        // GET: api/Spotify/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        // GET: api/Spotify
+        // [HttpGet("/tracks")]
+        //[Authorize]
+        public IActionResult GetSongs([FromHeader] string accessToken, [FromHeader] string tokenType, [FromHeader] string playlistId)
         {
-            return "value";
+            _spotify = new SpotifyWebAPI()
+            {
+                AccessToken = accessToken,
+                TokenType = tokenType // Always "Bearer"
+            };
+            
+            Task<Paging<PlaylistTrack>> tracks = _spotify.GetPlaylistTracksAsync(playlistId);
+
+            if (tracks.Await().HasError())
+                return BadRequest();
+
+            return Ok(Json(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
         }
+
 
         // POST: api/Spotify
         [HttpPost]
@@ -31,16 +75,6 @@ namespace ListPLaylistV2.Controllers.Spotify
         {
         }
 
-        // PUT: api/Spotify/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
 
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
