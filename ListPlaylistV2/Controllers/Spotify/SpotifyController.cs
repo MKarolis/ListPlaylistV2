@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -12,24 +13,17 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using Unosquare.Swan;
 using ListPLaylistV2.Models.Spotify.Mappers;
-
+using ListPLaylistV2.Models.Spotify;
 
 namespace ListPLaylistV2.Controllers.Spotify
 {
-    // [Route("spotify/")]
-    // [ApiController]
-    public class SpotifyController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class SpotifyController : ControllerBase
     {
         private SpotifyWebAPI _spotify;
 
-        // [HttpGet("/")]
-        public String GetIndex([FromHeader] string input)
-        {
-            return input;
-        }
-        
-        // GET: api/Spotify
-        // [HttpGet("/playlists")]
+        [HttpGet("playlists")]
         // [Authorize]
         public IActionResult GetPlaylists([FromHeader] string accessToken, [FromHeader] string tokenType)
         {
@@ -46,12 +40,13 @@ namespace ListPLaylistV2.Controllers.Spotify
             if (playlists.Await().HasError())
                 return BadRequest(playlists.Exception.Message);
 
-            return Ok(Json(playlists.Result.Items));
+            // Catch 500 sometime later
+
+            return Ok(JsonSerializer.Serialize<List<SimplePlaylist>>(playlists.Result.Items));
         }
 
-        // GET: api/Spotify
-        // [HttpGet("/tracks")]
-        //[Authorize]
+        [HttpGet("tracks")]
+        // [Authorize]
         public IActionResult GetSongs([FromHeader] string accessToken, [FromHeader] string tokenType, [FromHeader] string playlistId)
         {
             _spotify = new SpotifyWebAPI()
@@ -65,16 +60,14 @@ namespace ListPLaylistV2.Controllers.Spotify
             if (tracks.Await().HasError())
                 return BadRequest();
 
-            return Ok(Json(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
+            return Ok(JsonSerializer.Serialize<List<SpotifyTrack>>(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
         }
-
 
         // POST: api/Spotify
         [HttpPost]
         public void Post([FromBody] string value)
         {
+
         }
-
-
     }
 }
