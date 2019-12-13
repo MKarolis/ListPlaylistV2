@@ -3,7 +3,7 @@ import './Navbar.css';
 import { Navbar } from 'react-bootstrap';
 import logo from './../../assets/images/logo.svg';
 
-export const navbar = () => (
+const navbar = () => (
     <Navbar expand="lg" className="navbar">
         <Navbar.Brand href="/">
             <img
