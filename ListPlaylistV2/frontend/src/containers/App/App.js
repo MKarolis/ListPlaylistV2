@@ -5,6 +5,7 @@ import Home from '../Home/Home';
 import Convert from '../Convert/Convert';
 
 import './App.css';
+import CallbackSpotify from "../CallbackSpotify/CallbackSpotify";
 
 const NotFound = () => (
 	<div>
@@ -22,6 +23,7 @@ function App(props) {
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route exact path="/convert" component={Convert} />
+						<Route path="/spotifyCallback" component={CallbackSpotify}/>
 						<Route component={NotFound} />
 					</Switch>
 				</Router>
