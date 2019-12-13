@@ -15,6 +15,9 @@ using Unosquare.Swan;
 using ListPLaylistV2.Models.Spotify.Mappers;
 using ListPLaylistV2.Models.Spotify;
 
+// Catch 500 sometime later
+// Check if token has expired 
+
 namespace ListPLaylistV2.Controllers.Spotify
 {
     [Route("api/[controller]")]
@@ -39,8 +42,6 @@ namespace ListPLaylistV2.Controllers.Spotify
 
             if (playlists.Await().HasError())
                 return BadRequest(playlists.Exception.Message);
-
-            // Catch 500 sometime later
 
             return Ok(JsonSerializer.Serialize<List<SimplePlaylist>>(playlists.Result.Items));
         }

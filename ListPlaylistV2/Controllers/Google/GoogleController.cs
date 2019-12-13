@@ -17,12 +17,10 @@ namespace ListPLaylistV2.Controllers.Google
     [ApiController]
     public class GoogleController : ControllerBase
     {
-        
         [HttpGet]
         public String GetTest()
         {
             return "Test";
-            
         }
     }
 }
