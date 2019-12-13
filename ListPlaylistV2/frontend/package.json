@@ -16,6 +16,7 @@
     "react-router-dom": "^5.1.2",
     "react-router-redux": "5.0.0-alpha.8",
     "react-scripts": "3.2.0",
+    "react-spotify-login": "^0.9.1",
     "redux": "^4.0.4",
     "redux-thunk": "2.3.0",
     "rimraf": "3.0.0",

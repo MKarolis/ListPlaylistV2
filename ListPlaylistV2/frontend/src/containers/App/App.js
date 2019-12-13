@@ -6,6 +6,7 @@ import SourceSelect from '../SourceSelect/SourceSelect';
 import Convert from '../Convert/Convert';
 
 import './App.css';
+import CallbackSpotify from "../CallbackSpotify/CallbackSpotify";
 
 const NotFound = () => (
 	<div>
@@ -15,21 +16,21 @@ const NotFound = () => (
 );
 
 function App(props) {
-    return (
-        <div className="App">
-            <NavigationBar />
-            <main>
-                <Router history={props.history}> 
-                    <Switch>
-                        <Route exact path='/' component={Home} />
-                        <Route exaact path="/convert" component={Convert} />
-                        <Route path='/source-select' component={SourceSelect} />
-                        <Route component={NotFound} />
-                    </Switch> 
-                </Router>
-            </main>
-        </div>
-    );
+	return (
+		<div className="App">
+			<NavigationBar />
+			<main>
+				<Router history={props.history}>
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route exact path="/convert" component={Convert} />
+						<Route path="/spotifyCallback" component={CallbackSpotify}/>
+						<Route component={NotFound} />
+					</Switch>
+				</Router>
+			</main>
+		</div>
+	);
 }
 
 export default App;
