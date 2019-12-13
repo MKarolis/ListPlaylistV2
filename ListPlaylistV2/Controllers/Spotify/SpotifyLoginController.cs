@@ -21,7 +21,7 @@ namespace dotnet_core_spotify_authentication.Controllers
     {
         SpotifyAuthentication sAuth = new SpotifyAuthentication();
 
-        [HttpGet("/")]
+        [HttpGet("/ffffff")]
         public ContentResult Get()
         {
             var qb = new QueryBuilder();
@@ -30,9 +30,9 @@ namespace dotnet_core_spotify_authentication.Controllers
             qb.Add("scope", "user-read-private " +
                             "user-read-email " +
                             "playlist-read-private" +
-                            "playlist-read-collaborative" + // User's playlist, editable publicly
-                            "playlist-modify-private" + 
-                            "playlist-modify-public");
+                            "playlist-read-collaborative " + // User's playlist, editable publicly
+                            "playlist-modify-private " + 
+                            "playlist-modify-public ");
             qb.Add("redirect_uri", sAuth.redirectURL);
 
             //reiktu pridet anchor prie spotify-login btn
