@@ -13,8 +13,7 @@ using System.Text.Json.Serialization;
 using Unosquare.Swan;
 using ListPLaylistV2.Models.Spotify.Mappers;
 using ListPLaylistV2.Models.Spotify;
-using Newtonsoft.Json;
-// using JsonSerializer = System.Text.Json.JsonSerializer;
+using ListPLaylistV2.Controllers.utils;
 
 // Catch 500 sometime later
 // Check if token has expired 
@@ -27,26 +26,15 @@ namespace ListPLaylistV2.Controllers.Spotify
     {
         private SpotifyWebAPI _spotify;
 
-        private Tuple<string, string> GetAuthSeparated(String Authorization)
-        {
-            int separatorIndex = Authorization.IndexOf(' ');
-            string tokenType = Authorization.Substring(0, separatorIndex);
-            string accessToken = Authorization.Substring(separatorIndex + 1);
-
-            return new Tuple<string, string>(tokenType, accessToken);
-        }
-
         [HttpGet("playlists")]
         // [Authorize]
         //public IActionResult GetPlaylists([FromHeader] string accessToken, [FromHeader] string tokenType)
-        public IActionResult GetPlaylists([FromHeader] string Authorization)
+        public IActionResult GetPlaylists([FromHeader] string spotifyAuthToken)
         {
-            Tuple<string, string> auth = GetAuthSeparated(Authorization);
-
             _spotify = new SpotifyWebAPI()
             {
-                TokenType = auth.Item1,
-                AccessToken = auth.Item2
+                TokenType = "Bearer",
+                AccessToken = spotifyAuthToken
             };
 
             String userId = _spotify.GetPrivateProfileAsync().Result.Id;
@@ -60,13 +48,12 @@ namespace ListPLaylistV2.Controllers.Spotify
 
         [HttpGet("tracks")]
         // [Authorize]
-        public IActionResult GetSongs([FromHeader] string Authorization, [FromHeader] string playlistId)
+        public IActionResult GetSongs([FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
         {
-            Tuple<string, string> auth = GetAuthSeparated(Authorization);
             _spotify = new SpotifyWebAPI()
             {
-                TokenType = auth.Item1,
-                AccessToken = auth.Item2
+                TokenType = "Bearer",
+                AccessToken = spotifyAuthToken
             };
 
             Task<Paging<PlaylistTrack>> tracks = _spotify.GetPlaylistTracksAsync(playlistId);
