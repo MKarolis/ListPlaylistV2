@@ -30,7 +30,7 @@ export const loginWithSpotify = (token, expiresAt) => {
             payload: {token, expiresAt}
         });
     }
-}
+};
 export const logoutFromSpotify = () => {
     return dispatch => {
         dispatch({
@@ -38,10 +38,13 @@ export const logoutFromSpotify = () => {
             payload: ""
         });
     }
-}
+};
 export const completeLogout = () => {
-    return dispatch => ({
-        type: LOGOUT,
-        payload: ""
-    });
-}
+    console.log("we got here");
+    return dispatch => {
+        dispatch({
+            type: LOGOUT,
+            payload: ""
+        });
+    };
+};

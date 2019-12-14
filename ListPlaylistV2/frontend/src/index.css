@@ -27,3 +27,8 @@ body {
         display: none;
     }
 }
+@media (max-width: 400px){
+    .hide-on-very-small{
+        display: none !important;
+    }
+}
