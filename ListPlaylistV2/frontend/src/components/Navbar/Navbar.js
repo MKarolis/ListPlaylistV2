@@ -22,7 +22,6 @@ class navbar extends React.Component{
     }
 
     logOut = (e) =>{
-        console.log(e);
         e.preventDefault();
         this.props.logOut();
     };
