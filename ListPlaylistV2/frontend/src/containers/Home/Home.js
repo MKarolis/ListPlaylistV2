@@ -10,13 +10,20 @@ import './Home.css';
 
 import * as config from '../../config/GeneralConfig/GeneralConfig';
 import * as spotifyConfig from '../../config/SpotifyConfig/SpotifyConfig';
+import {checkCredentialsExpire} from "../../utils/auth/checkTokenExpire";
 
 class Home extends React.Component {
 	constructor(props) {
 		super(props);
 
 		this.responseGoogle = this.responseGoogle.bind(this);
+		this.redirectToSpotify = this.redirectToSpotify.bind(this);
 	}
+
+	redirectToSpotify = () =>{
+		window.location.href=`${spotifyConfig.authEndpoint}?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${spotifyConfig.redirectUri}
+									&scope=${spotifyConfig.scopes.join("%20")}&response_type=${spotifyConfig.responseType}&show_dialog=true`;
+	};
 
 	responseGoogle = (response) => {
 		if(response.error){
@@ -27,9 +34,13 @@ class Home extends React.Component {
 		this.props.googleLogin(response.profileObj.name, response.tokenObj.access_token, response.tokenObj.first_issued_at+0.9*(response.tokenObj.expires_in*1000));
 	};
 
-	render() {
-		return (
+	componentWillMount() {
+		checkCredentialsExpire();
+	}
 
+	render() {
+		const {loggedInGoogle, loggedInSpotify} = this.props;
+		return (
 			<div className="row">
 				<div className="col d-none d-md-block">
 					<img src={headphones} alt="headphones" className="headphones-img" />
@@ -43,24 +54,28 @@ class Home extends React.Component {
 							and vice versa!
 						</h1>
 					</div>
+					{loggedInSpotify && loggedInGoogle ?
+					<div className="row">
+						<button className="button standart-btn">
+							<span>LET'S GO!</span>
+						</button>
+					</div> :
 					<div className="row">
 						<div className="login-button-container">
-							<a href={`${spotifyConfig.authEndpoint}?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${spotifyConfig.redirectUri}
-									&scope=${spotifyConfig.scopes.join("%20")}&response_type=${spotifyConfig.responseType}&show_dialog=true`}>
-								<button className="spotify login-btn">
-									<img
-										src={spotifyLogo}
-										alt="spotify-logo"
-										className="spotify-img"
-									/>
-									<span>Login with Spotify</span>
-								</button>
-							</a>
+							<button disabled={!!loggedInSpotify} className="button spotify login-btn" onClick={this.redirectToSpotify}>
+								<img
+									src={spotifyLogo}
+									alt="spotify-logo"
+									className="spotify-img"
+								/>
+								<span>Login with Spotify</span>
+							</button>
 							<GoogleLogin
 								clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
 								scope="https://www.googleapis.com/auth/youtube"
+								disabled={!!loggedInGoogle}
 								render={renderProps => (
-									<button onClick={renderProps.onClick} disabled={renderProps.disabled} className="google login-btn">
+									<button  onClick={renderProps.onClick} disabled={renderProps.disabled} className="button google login-btn">
 										<img
 											src={googleLogo}
 											alt="google-logo"
@@ -75,15 +90,21 @@ class Home extends React.Component {
 								onFailure={this.responseGoogle}
 							/>
 						</div>
-					</div>
+					</div>}
 				</div>
 			</div>
 		);
 	}
 }
 
+const mapStateToProps = (state) =>({
+	loggedInGoogle: state.authentication.authenticatedWithGoogle,
+	loggedInSpotify: state.authentication.authenticatedWithSpotify
+});
+
+
 const mapDispatchToProps = dispatch => ({
 	googleLogin: (username, token, expiresAt) => dispatch(loginWithGoogle(username, token, expiresAt))
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
