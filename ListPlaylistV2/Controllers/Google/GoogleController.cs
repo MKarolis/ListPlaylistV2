@@ -81,34 +81,18 @@ namespace ListPLaylistV2.Controllers.Google
             var newPlaylist = new Playlist();
             newPlaylist.Snippet = new PlaylistSnippet();
             newPlaylist.Snippet.Title = "asd";
-            newPlaylist.Snippet.Description = "asd";
+            newPlaylist.Snippet.Description = "";
             newPlaylist.Status = new PlaylistStatus();
             newPlaylist.Status.PrivacyStatus = "public";
             var playlistInsertReq = _youtube.Playlists.Insert(newPlaylist, "snippet,status");
             newPlaylist = await playlistInsertReq.ExecuteAsync();
 
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine(queries.Count);
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine("\n");
-
-            foreach (string stringas in queries)
-            {
-                System.Diagnostics.Debug.WriteLine(stringas);
-
-            }
-
-
-
-
-            /* foreach (var stringas in queries)
+             foreach (var stringas in queries)
          {
-             Console.WriteLine(stringas);
-
-             var req = _youtube.Search.List("snipper");
+             var req = _youtube.Search.List("snippet");
              req.Q = stringas;
              req.Type = "youtube#video";
+             req.MaxResults = 1;
              req.Order = SearchResource.ListRequest.OrderEnum.Relevance;
 
              var resp = await req.ExecuteAsync();
@@ -118,14 +102,14 @@ namespace ListPLaylistV2.Controllers.Google
              newPlaylistItem.Snippet.PlaylistId = newPlaylist.Id;
              newPlaylistItem.Snippet.ResourceId = new ResourceId();
              newPlaylistItem.Snippet.ResourceId.Kind = "youtube#video";
-             newPlaylistItem.Snippet.ResourceId.VideoId = resp.Items.First().Id.ToString();
+             newPlaylistItem.Snippet.ResourceId.VideoId = resp.Items.First().Id.VideoId;
              var playlistItemInsertReq = _youtube.PlaylistItems.Insert(newPlaylistItem, "snippet");
              var item = await playlistItemInsertReq.ExecuteAsync();
 
-         }*/
+         }
 
 
-            return newPlaylist.Id;
+            return ("https://www.youtube.com/playlist?list=" + newPlaylist.Id);
 
 
 
