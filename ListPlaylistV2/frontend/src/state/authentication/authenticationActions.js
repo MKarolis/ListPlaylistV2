@@ -3,13 +3,14 @@
     LOGOUT_GOOGLE,
     LOGIN_SPOTIFY,
     LOGOUT_SPOTIFY,
+    LOGOUT
 } from './authenticationActionTypes';
 
-export const loginWithGoogle = (token) => {
+export const loginWithGoogle = (username, token, expiresAt) => {
     return dispatch => {
         dispatch({
             type: LOGIN_GOOGLE,
-            payload: token
+            payload: {token, username, expiresAt}
         });
     }
 }
@@ -22,11 +23,11 @@ export const logoutFromGoogle = () => {
     }
 }
 
-export const loginWithSpotify = (token) => {
+export const loginWithSpotify = (token, expiresAt) => {
     return dispatch => {
         dispatch({
             type: LOGIN_SPOTIFY,
-            payload: token
+            payload: {token, expiresAt}
         });
     }
 }
@@ -37,4 +38,10 @@ export const logoutFromSpotify = () => {
             payload: ""
         });
     }
+}
+export const completeLogout = () => {
+    return dispatch => ({
+        type: LOGOUT,
+        payload: ""
+    });
 }
