@@ -25,6 +25,7 @@ function App(props) {
 				<Router history={props.history}>
 					<Switch>
 						<Route exact path="/" component={Home} />
+						<ProtectedRoute exact path='/source-select' component={SourceSelect} />
 						<ProtectedRoute exact path="/convert" component={Convert} />
 						<Route path="/spotifyCallback" component={CallbackSpotify}/>
 						<Route component={NotFound} />

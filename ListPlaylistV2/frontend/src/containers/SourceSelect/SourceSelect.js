@@ -18,15 +18,15 @@ class SourceSelect extends React.Component {
 						Select playlist <br /> source
 					</h2>
 				</div>
-				<div className="row mx-auto d-inline-flex mt-5">
-					<div className="col-md-6 com-sm-12">
-						<a href="">
-							<img src={spotifyLogoBlue} className="spotify-logo-blue" />
+				<div className="row mx-auto d-inline-flex">
+					<div className="col-md-6 col-sm-6 com-xs-12">
+						<a href="#">
+							<img src={youtubeLogoBlue} className="youtube-source-logo-blue source-logo" />
 						</a>
 					</div>
-					<div className="col-md-6 com-sm-12">
-						<a href="">
-							<img src={youtubeLogoBlue} className="spotify-logo-blue" />
+					<div className="col-md-6 col-sm-6 com-xs-12">
+						<a href="#">
+							<img src={spotifyLogoBlue} className="spotify-source-logo-blue source-logo" />
 						</a>
 					</div>
 				</div>
