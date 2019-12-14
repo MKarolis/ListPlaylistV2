@@ -2,9 +2,10 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 import {connect} from 'react-redux';
 
+import {checkCredentialsExpire} from "../../utils/auth/checkTokenExpire";
+
 class ProtectedRoute extends React.Component{
     renderComponent(){
-        console.log(this.props);
         const {component: Component, loggedInSpotify, loggedInGoogle} = this.props;
         if(loggedInSpotify && loggedInGoogle){
             return <Component/>;
@@ -12,6 +13,7 @@ class ProtectedRoute extends React.Component{
         return <Redirect to="/" />;
     }
     render() {
+        checkCredentialsExpire();
         return(
             <React.Fragment>
                 {this.renderComponent()}

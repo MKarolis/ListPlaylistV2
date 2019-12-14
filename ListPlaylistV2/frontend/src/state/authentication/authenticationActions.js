@@ -40,7 +40,6 @@ export const logoutFromSpotify = () => {
     }
 };
 export const completeLogout = () => {
-    console.log("we got here");
     return dispatch => {
         dispatch({
             type: LOGOUT,
