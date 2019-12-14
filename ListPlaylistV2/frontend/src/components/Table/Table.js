@@ -24,15 +24,6 @@ var test_url = 'https://jsonplaceholder.typicode.com/todos';
 // 			this.setState({ playlists: res.data });
 // 		});
 // 	}
-function getPlaylists() {
-	axios({
-		method: 'get',
-		url: test_url
-	})
-		.then(res => console.log(res))
-		.catch(err => console.log(err));
-}
-
 
 const columns = [
 	{
@@ -78,15 +69,15 @@ const data = [
 	},
 	{
 		key: '5',
-		name: 'Disabled User',
-		age: 99,
-		address: 'Sidney No. 1 Lake Park'
+		name: 'Jim Green',
+		age: 41,
+		address: 'London No. 1 Lake Park'
 	},
 	{
 		key: '6',
-		name: 'Disabled User',
-		age: 99,
-		address: 'Sidney No. 1 Lake Park'
+		name: 'John Brown',
+		age: 30,
+		address: 'New York No. 1 Lake Park'
 	}
 ];
 

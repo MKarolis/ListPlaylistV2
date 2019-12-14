@@ -5,15 +5,18 @@
 	height: auto;
 }
 .youtube-logo-blue {
-	padding-left: 3rem;
+	margin-left: 3rem;
 }
 .spotify-logo-blue {
-	padding-right: 3rem;
+	margin-right: 3rem;
 }
-
+.center-heading.heading-big {
+	color: #edf5e1;
+	/* text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
+}
 @media (max-width: 767px) {
 	.youtube-logo-blue,
 	.youtube-logo-blue {
-		padding: 0 !important;
+		margin: 0 !important;
 	}
 }
