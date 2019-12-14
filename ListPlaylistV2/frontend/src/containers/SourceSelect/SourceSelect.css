@@ -1,22 +1,28 @@
-﻿.spotify-logo-blue,
-.youtube-logo-blue {
-	max-width: 500px;
-	min-width: 200px;
-	height: auto;
+﻿.source-logo {
+	transition: all 200ms ease-in-out;
 }
-.youtube-logo-blue {
-	margin-left: 3rem;
+.source-logo:hover{
+	transform: scale(1.05);
 }
-.spotify-logo-blue {
+.youtube-source-logo-blue {
 	margin-right: 3rem;
+	width: 300px;
+}
+.spotify-source-logo-blue {
+	margin-left: 3rem;
+	width: 250px;
+	margin-top: 25px
 }
 .center-heading.heading-big {
 	color: #edf5e1;
-	/* text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
 }
 @media (max-width: 767px) {
-	.youtube-logo-blue,
-	.youtube-logo-blue {
+	.youtube-source-logo-blue,
+	.spotify-source-logo-blue {
+		width: 50%;
 		margin: 0 !important;
+	}
+	.center-heading.heading-big{
+		margin-bottom: 20px;
 	}
 }
