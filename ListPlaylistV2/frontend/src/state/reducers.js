@@ -2,5 +2,5 @@
 import authenticationReducer from './authentication/authenticationReducer';
 
 export default combineReducers({
-     authentication: authenticationReducer,
+     authentication: authenticationReducer
 });
