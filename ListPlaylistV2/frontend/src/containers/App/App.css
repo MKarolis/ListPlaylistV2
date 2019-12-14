@@ -20,7 +20,61 @@
 .App-link {
 	color: #09d3ac;
 }
+button{
+	outline: none !important;
+}
+.button{
+	display: flex;
+	background-color: #05386b;
+	color: #FFF;
+	border: none;
+	justify-content: space-evenly;
+}
+
+.button:hover{
+
+	opacity: 0.9;
+}
+
+.button:disabled{
+	background-color: #0C616F;
+	/*background-color: #0C616FD6;*/
+	transform: none;
+	opacity: 1;
+}
+
+.standart-btn{
+	width: 230px;
+	height: 55px;
+	border-radius: 30px;
+	transition: all 0.25s ease-out;
+}
+.standart-btn:hover{
+	width: 240px;
+	margin-left: -5px;
+}
+.standart-btn span{
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	display: flex;
+	align-self: center;
+	letter-spacing: 0.05em;
+}
 
 main {
 	margin: 5%;
+}
+@media (max-width: 768px) {
+	.login-button-container {
+		flex-direction: column-reverse;
+		justify-content: center;
+		margin: auto;
+	}
+	.button {
+		margin: 2vw auto;
+	}
+	.standart-btn:hover{
+		margin-left: auto;
+	}
 }
