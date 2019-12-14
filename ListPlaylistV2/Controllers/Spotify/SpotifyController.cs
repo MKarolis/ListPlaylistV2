@@ -50,7 +50,7 @@ namespace ListPLaylistV2.Controllers.Spotify
 
         [HttpGet("tracks")]
         // [Authorize]
-        public IActionResult GetSongs([FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
+        public IActionResult GetTracks([FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
         {
             _spotify = new SpotifyWebAPI()
             {
