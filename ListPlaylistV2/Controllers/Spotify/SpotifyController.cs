@@ -14,6 +14,14 @@ using Unosquare.Swan;
 using ListPLaylistV2.Models.Spotify.Mappers;
 using ListPLaylistV2.Models.Spotify;
 using ListPLaylistV2.Controllers.utils;
+using Google.Apis.Services;
+using Google.Apis.Upload;
+using Google.Apis.Util.Store;
+using Google.Apis.Auth.OAuth2;
+using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
+using Microsoft.EntityFrameworkCore;
+using SpotifyAPI.Web.Enums;
 
 // Catch 500 sometime later
 // Check if token has expired 
@@ -25,6 +33,7 @@ namespace ListPLaylistV2.Controllers.Spotify
     public class SpotifyController : Controller
     {
         private SpotifyWebAPI _spotify;
+        private YouTubeService _youtube;
 
         [HttpGet("playlists")]
         // [Authorize]
@@ -68,11 +77,97 @@ namespace ListPLaylistV2.Controllers.Spotify
             return Ok(Json(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
         }
 
-        // POST: api/Spotify
-        [HttpPost]
-        public void Post([FromBody] string value)
+        [HttpPost("playlist")]
+        // [Authorize]
+        public async Task<IActionResult> MigrateToSpotify([FromHeader] string spotifyAuthToken, [FromHeader] string googleAuthToken, [FromHeader] string playlistId)
         {
+            /* Youtube */
+            _youtube = new YouTubeService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
+                ApplicationName = this.GetType().ToString()
+            });
 
+            // Get playlist
+            var requestPlaylistItems = _youtube.PlaylistItems.List("snippet");
+            requestPlaylistItems.PlaylistId = playlistId;
+            requestPlaylistItems.MaxResults = 50;
+
+            var trackItems = requestPlaylistItems.ExecuteAsync().Result.Items;
+
+            // Get playlist name
+            var requestPlaylists = _youtube.Playlists.List("snippet");
+            requestPlaylists.Mine = true;
+            requestPlaylists.MaxResults = 50;
+
+            var youtubePlaylists = requestPlaylists.ExecuteAsync().Result.Items;
+
+            string playlistName = "";
+            foreach (var playlist in youtubePlaylists)
+            {
+                if (playlist.Id == playlistId)
+                {
+                    playlistName = playlist.Snippet.Title;
+                    break;
+                }
+            }
+
+            // Form queries for Spotify
+            List<string> queries = trackItems.Select(track => FormatTitle(track.Snippet.Title)).ToList();
+
+            /* Spotify */
+            _spotify = new SpotifyWebAPI()
+            {
+                TokenType = "Bearer",
+                AccessToken = spotifyAuthToken
+            };
+
+            string userId = _spotify.GetPrivateProfileAsync().Result.Id;
+
+            // Create playlist
+            var spotifyPlaylist = _spotify.CreatePlaylistAsync(userId, playlistName);
+
+            // return Ok(spotifyPlaylist.Result.Error.Message);
+
+            foreach (var query in queries)
+            {
+                //
+                var foundTrackUri = _spotify.SearchItemsAsync(query, SearchType.Track).Result.Tracks.Items.First().Uri;
+                ErrorResponse error = _spotify.AddPlaylistTrackAsync(spotifyPlaylist.Result.Id, foundTrackUri).Result;
+                if (error.HasError())
+                {
+                    // do smth later
+                }
+            }
+
+            return Ok(Json(spotifyPlaylist.Result.Uri));
+        }
+
+        public string FormatTitle(string title)
+        {
+            title = title.ToLower();
+
+            int found1 = title.IndexOf("(");
+            if (found1 != -1)
+                title = title.Substring(0, found1 - 1);
+
+            int found2 = title.IndexOf("[");
+            if (found2 != -1)
+                title = title.Substring(0, found2 - 1);
+
+            string[] trimWords =
+            {
+                "feat", "ft.",
+                "official music video", "music video", "official video", "video",
+                "with lyrics", "lyrics",
+                "live performance", "live", "vevo",
+                "/", "\\", "&", "!", "?", "@", "#", "-", "\"", ":",
+            };
+
+            foreach (string trimWord in trimWords)
+                title = title.Replace(trimWord, "");
+
+            return title;
         }
     }
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Google.Apis.Services;
@@ -49,59 +47,11 @@ namespace ListPLaylistV2.Controllers.Google
             return Ok(Json(playlists));
         }
 
-        [HttpGet("tracks")]
-        // [Authorize]
-        public IActionResult GetTracks([FromHeader] string googleAuthToken, [FromHeader] string playlistId)
-        {
-            _youtube = new YouTubeService(new BaseClientService.Initializer()
-            {
-                HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
-                ApplicationName = this.GetType().ToString()
-            });
-
-            var requestPlaylists = _youtube.PlaylistItems.List("snippet");
-            requestPlaylists.PlaylistId = playlistId;
-            requestPlaylists.MaxResults = 50;
-
-            var trackItems = requestPlaylists.ExecuteAsync().Result.Items;
-
-            List<string> queries = trackItems.Select(track => FormatTitle(track.Snippet.Title)).ToList();
-
-            return Ok(Json(queries));
-        }
-
-        public string FormatTitle(string title)
-        {
-            title = title.ToLower();
-
-            int found1 = title.IndexOf("(");
-            if (found1 != -1)
-                title = title.Substring(0, found1-1);
-
-            int found2 = title.IndexOf("[");
-            if (found2 != -1)
-                title = title.Substring(0, found2-1);
-
-            string[] trimWords =
-            {
-                "feat", "ft.", 
-                "official music video", "music video", "official video", "video",
-                "with lyrics", "lyrics",
-                "live performance", "live", "vevo",
-                "/", "\\", "&", "!", "?", "@", "#", "-", "\"", ":",
-            };
-
-            foreach (string trimWord in trimWords)
-                title = title.Replace(trimWord, "");
-
-            return title;
-        }
-
         // Convertion progress, Duplex services 
 
         [HttpPost("playlist")]
         // [Authorize]
-        public async Task<IActionResult> MigratePlaylist([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
+        public async Task<IActionResult> MigrateToYoutube([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
         {
             /* Spotify */
             _spotify = new SpotifyWebAPI()
@@ -133,7 +83,7 @@ namespace ListPLaylistV2.Controllers.Google
                 return track.Name + " " + Artists;
             }).ToList();
 
-            /* Google */
+            /* Youtube */
             _youtube = new YouTubeService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
