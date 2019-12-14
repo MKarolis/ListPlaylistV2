@@ -5,10 +5,21 @@ import './SourceSelect.css';
 import spotifyLogoBlue from '../../assets/images/spotify-blue.svg';
 import youtubeLogoBlue from '../../assets/images/youtube-blue.svg';
 
+import * as CONSTANTS from '../../constants/Constants';
+import * as migrateActions from '../../state/migration/migrationActions';
+
 class SourceSelect extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.setPlaylistSource = this.setPlaylistSource.bind(this);
 	}
+
+	setPlaylistSource = (e, source) => {
+		e.preventDefault();
+		this.props.setPlaylistSource(source);
+		this.props.history.push('/convert');
+	};
 
 	render() {
 		return (
@@ -20,12 +31,12 @@ class SourceSelect extends React.Component {
 				</div>
 				<div className="row mx-auto d-inline-flex">
 					<div className="col-md-6 col-sm-6 com-xs-12">
-						<a href="#">
+						<a href="#" onClick={(e) => this.setPlaylistSource(e, CONSTANTS.PLAYLIST_SOURCE_YOUTUBE)}>
 							<img src={youtubeLogoBlue} className="youtube-source-logo-blue source-logo" />
 						</a>
 					</div>
 					<div className="col-md-6 col-sm-6 com-xs-12">
-						<a href="#">
+						<a href="#" onClick={(e) => this.setPlaylistSource(e, CONSTANTS.PLAYLIST_SOURCE_SPOTIFY)}>
 							<img src={spotifyLogoBlue} className="spotify-source-logo-blue source-logo" />
 						</a>
 					</div>
@@ -36,7 +47,11 @@ class SourceSelect extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	authenticatedWithGoogle: state.authentication.authenticatedWithGoogle
+
 });
 
-export default connect(mapStateToProps)(SourceSelect);
+const mapDispatchToProps = (dispatch) =>({
+	setPlaylistSource: (source) => dispatch(migrateActions.setPlaylistSource(source))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SourceSelect);
