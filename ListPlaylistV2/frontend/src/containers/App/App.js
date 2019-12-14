@@ -7,6 +7,8 @@ import Convert from '../Convert/Convert';
 
 import ProtectedRoute from "../Routes/ProtectedRoute";
 
+import {checkCredentialsExpire} from "../../utils/auth/checkTokenExpire";
+
 import './App.css';
 import CallbackSpotify from "../CallbackSpotify/CallbackSpotify";
 
@@ -18,6 +20,8 @@ const NotFound = () => (
 );
 
 function App(props) {
+	checkCredentialsExpire();
+
 	return (
 		<div className="App">
 			<NavigationBar />
