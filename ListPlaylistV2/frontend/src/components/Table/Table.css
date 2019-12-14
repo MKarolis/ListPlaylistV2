@@ -5,17 +5,78 @@
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 740px;
+	width: 800px;
 	height: 349px;
 }
-
-.ant-table-thead > tr > th {
-	background-color: #05386b;
+.ant-table {
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 22px;
 }
+
+.ant-table-row .ant-table-row {
+	height: 69px !important;
+	border-radius: 5px;
+	background-color: #fff;
+}
+/* .ant-table .ant-table-row-level-0 > td {
+	color: #05386b;
+} */
+/*HEADER STYLING*/
 .ant-table-thead > tr > th > span {
 	color: #edf5e1;
+	letter-spacing: 0.05em;
+}
+.ant-table-header {
+	background: #05386b;
+}
+.ant-table-thead > tr > th {
+	background-color: #05386b;
+	height: 55px !important;
 }
 
+/*CHECKBOX STYLING*/
+.ant-checkbox {
+	height: 30px;
+	width: 30px;
+	border: 3px solid #7ad768;
+	border-radius: 50px;
+	background-color: white;
+	margin: auto;
+	position: relative;
+	top: 50%;
+}
+.ant-checkbox-inner {
+	border: none;
+	margin: auto;
+	position: relative;
+	top: 17%;
+}
+
+.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+	background-color: white !important;
+}
+.ant-checkbox-checked .ant-checkbox-inner {
+	background-color: #7ad768;
+	border: none;
+	margin: auto;
+	border-radius: 50px;
+	position: relative;
+	top: 17%;
+}
+
+/*SCROLLBAR STYLING*/
+div::-webkit-scrollbar {
+	width: 10px;
+
+	background-color: #05386b;
+}
+div::-webkit-scrollbar-track {
+	width: 10px;
+	background-color: transparent;
+}
+
+/*RESPONSIVE DESIGN*/
 @media (max-width: 1035px) {
 	.spotify-table {
 		width: 70%;

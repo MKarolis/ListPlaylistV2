@@ -51,6 +51,7 @@ class Convert extends React.Component {
 
 	render() {
 		return (
+<<<<<<< HEAD
 			<React.Fragment>
 				{this.state.loading ?
 				<LoadingWide/> :
@@ -66,6 +67,17 @@ class Convert extends React.Component {
 					</div>
 				</div>}
 			</React.Fragment>
+=======
+			<div className="container">
+				<div className=" center-div">
+					<h1 className="convert-heading">Select playlist to move</h1>
+				</div>
+				<SpotifyTable />
+				<div className="center-div high-container">
+					<ConvertButton className="cnv-btn" />
+				</div>
+			</div>
+>>>>>>> 3428b40... Tweeked table
 		);
 	}
 }

@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Google.Apis.Auth.OAuth2;
-using Google.Apis.Auth.OAuth2.Flows;
-using Google.Apis.Auth.OAuth2.Responses;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Google.Apis.Services;
@@ -23,7 +21,6 @@ using Unosquare.Swan;
 
 namespace ListPLaylistV2.Controllers.Google
 {
-
     [Route("api/[controller]")]
     [ApiController]
     public class GoogleController : Controller
@@ -31,18 +28,30 @@ namespace ListPLaylistV2.Controllers.Google
         private SpotifyWebAPI _spotify;
         private YouTubeService _youtube;
 
-        [HttpGet]
-        public String GetTest()
+        [HttpGet("playlists")]
+        // [Authorize]
+        public IActionResult GetPlaylists([FromHeader] string googleAuthToken)
         {
-            return "Test";
+            _youtube = new YouTubeService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
+                ApplicationName = this.GetType().ToString()
+            });
+
+            var requestPlaylists = _youtube.Playlists.List("snippet");
+            requestPlaylists.Mine = true;
+            requestPlaylists.MaxResults = 50;
+
+            var playlists = requestPlaylists.ExecuteAsync().Result.Items;
+
+            return Ok(Json(playlists));
         }
 
         // Convertion progress, Duplex services 
-        // HttpPost
 
         [HttpPost("playlist")]
         // [Authorize]
-        public async Task<IActionResult> MigratePlaylist([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
+        public async Task<IActionResult> MigrateToYoutube([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
         {
             /* Spotify */
             _spotify = new SpotifyWebAPI()
@@ -74,7 +83,7 @@ namespace ListPLaylistV2.Controllers.Google
                 return track.Name + " " + Artists;
             }).ToList();
 
-            /* Google */
+            /* Youtube */
             _youtube = new YouTubeService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
