@@ -37,11 +37,13 @@ namespace ListPLaylistV2.Controllers.Spotify
                 AccessToken = spotifyAuthToken
             };
 
-            String userId = _spotify.GetPrivateProfileAsync().Result.Id;
+            string userId = _spotify.GetPrivateProfileAsync().Result.Id;
             Task<Paging<SimplePlaylist>> playlists = _spotify.GetUserPlaylistsAsync(userId);
 
             if (playlists.Await().HasError())
                 return BadRequest(playlists.Exception.Message);
+
+            HttpContext.Response.ContentType = "application/json";
 
             return Ok(Json(playlists.Result.Items));
         }
@@ -60,6 +62,8 @@ namespace ListPLaylistV2.Controllers.Spotify
 
             if (tracks.Await().HasError())
                 return BadRequest();
+
+            HttpContext.Response.ContentType = "application/json";
 
             return Ok(Json(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
         }
