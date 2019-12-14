@@ -5,7 +5,7 @@ import googleLogo from '../../assets/images/google-logo.png';
 import { connect } from 'react-redux';
 import GoogleLogin from "react-google-login";
 
-import axios from 'axios';
+import {loginWithGoogle} from "../../state/authentication/authenticationActions";
 import './Home.css';
 
 import * as config from '../../config/GeneralConfig/GeneralConfig';
@@ -16,19 +16,16 @@ class Home extends React.Component {
 		super(props);
 
 		this.responseGoogle = this.responseGoogle.bind(this);
-		this.startSpotifyAuth = this.startSpotifyAuth.bind(this);
 	}
 
 	responseGoogle = (response) => {
+		if(response.error){
+			console.log(response.error);
+			return;
+		}
 		console.log(response);
-	}
-
-	startSpotifyAuth = () => {
-		axios.get(`${spotifyConfig.authEndpoint}?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}$redirect_uri=${spotifyConfig.redirectUri}
-			&scope=${spotifyConfig.scopes.join("%20")}&response_type=${spotifyConfig.responseType}`)
-			.then(response => {console.log(response)})
-			.catch(exception => {console.log(exception)});
-	}
+		this.props.googleLogin(response.profileObj.name, response.tokenObj.access_token, response.tokenObj.first_issued_at+0.9*(response.tokenObj.expires_in*1000));
+	};
 
 	render() {
 		return (
@@ -49,7 +46,7 @@ class Home extends React.Component {
 					<div className="row">
 						<div className="login-button-container">
 							<a href={`${spotifyConfig.authEndpoint}?client_id=${process.env.REACT_APP_SPOTIFY_CLIENT_ID}&redirect_uri=${spotifyConfig.redirectUri}
-									&scope=${spotifyConfig.scopes.join("%20")}&response_type=${spotifyConfig.responseType}`}>
+									&scope=${spotifyConfig.scopes.join("%20")}&response_type=${spotifyConfig.responseType}&show_dialog=true`}>
 								<button className="spotify login-btn">
 									<img
 										src={spotifyLogo}
@@ -84,8 +81,8 @@ class Home extends React.Component {
 	}
 }
 
-const mapStateToProps = state => ({
-	googleUser: state.googleUser
+const mapDispatchToProps = dispatch => ({
+	googleLogin: (username, token, expiresAt) => dispatch(loginWithGoogle(username, token, expiresAt))
 });
 
-export default connect(mapStateToProps)(Home);
+export default connect(null, mapDispatchToProps)(Home);

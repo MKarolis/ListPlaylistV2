@@ -1,13 +1,17 @@
 ﻿import {
     LOGIN_GOOGLE, LOGOUT_GOOGLE,
-    LOGIN_SPOTIFY, LOGOUT_SPOTIFY
+    LOGIN_SPOTIFY, LOGOUT_SPOTIFY, LOGOUT
 } from './authenticationActionTypes';
 
 let initialState = {
     authenticatedWithGoogle: false,
     authenticatedWithSpotify: false,
     googleUserName: '',
+    googleAccessToken: '',
     spotifyUserName: '',
+    spotifyAccessToken: '',
+    spotifyExpiresAt: 0,
+    googleExpiresAt: 0
 }
 
 const authenticationReducer = (state = initialState, action) => {
@@ -15,8 +19,10 @@ const authenticationReducer = (state = initialState, action) => {
         case LOGIN_GOOGLE:
             return {
                 ...state,
-                googleUserName: action.payload,
+                googleUserName: action.payload.username,
+                googleAccessToken: action.payload.token,
                 authenticatedWithGoogle: true,
+                googleExpiresAt: action.expiresAt
             };
         case LOGOUT_GOOGLE:
             return {
@@ -27,8 +33,9 @@ const authenticationReducer = (state = initialState, action) => {
         case LOGIN_SPOTIFY:
             return {
                 ...state,
-                spotifyUserName: action.payload,
                 authenticatedWithSpotify: true,
+                spotifyAccessToken: action.payload.token,
+                spotifyExpiresAt: action.payload.expiresAt
             };
         case LOGOUT_SPOTIFY:
             return {
@@ -36,6 +43,8 @@ const authenticationReducer = (state = initialState, action) => {
                 spotifyUserName: null,
                 authenticatedWithSpotify: false,
             };
+        case LOGOUT:
+            return {...initialState};
         default:
             return {
                 ...state,
