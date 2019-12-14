@@ -1,0 +1,22 @@
+﻿.spotify-logo-blue,
+.youtube-logo-blue {
+	max-width: 500px;
+	min-width: 200px;
+	height: auto;
+}
+.youtube-logo-blue {
+	margin-left: 3rem;
+}
+.spotify-logo-blue {
+	margin-right: 3rem;
+}
+.center-heading.heading-big {
+	color: #edf5e1;
+	/* text-shadow: 2px 4px 3px rgba(0, 0, 0, 0.3); */
+}
+@media (max-width: 767px) {
+	.youtube-logo-blue,
+	.youtube-logo-blue {
+		margin: 0 !important;
+	}
+}

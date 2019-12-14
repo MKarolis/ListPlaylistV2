@@ -2,6 +2,7 @@ import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import NavigationBar from '../../components/Navbar/Navbar';
 import Home from '../Home/Home';
+import SourceSelect from '../SourceSelect/SourceSelect';
 import Convert from '../Convert/Convert';
 
 import ProtectedRoute from "../Routes/ProtectedRoute";
@@ -26,6 +27,7 @@ function App(props) {
 						<Route exact path="/" component={Home} />
 						<ProtectedRoute exact path="/convert" component={Convert} />
 						<Route path="/spotifyCallback" component={CallbackSpotify}/>
+                        <Route path='/source-select' component={SourceSelect} />
 						<Route component={NotFound} />
 					</Switch>
 				</Router>
