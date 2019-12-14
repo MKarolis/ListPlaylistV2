@@ -14,7 +14,7 @@ using Unosquare.Swan;
 using ListPLaylistV2.Models.Spotify.Mappers;
 using ListPLaylistV2.Models.Spotify;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
+// using JsonSerializer = System.Text.Json.JsonSerializer;
 
 // Catch 500 sometime later
 // Check if token has expired 
@@ -23,7 +23,7 @@ namespace ListPLaylistV2.Controllers.Spotify
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SpotifyController : ControllerBase
+    public class SpotifyController : Controller
     {
         private SpotifyWebAPI _spotify;
 
@@ -55,7 +55,7 @@ namespace ListPLaylistV2.Controllers.Spotify
             if (playlists.Await().HasError())
                 return BadRequest(playlists.Exception.Message);
 
-            return Ok(JsonConvert.SerializeObject(playlists.Result.Items));
+            return Ok(Json(playlists.Result.Items));
         }
 
         [HttpGet("tracks")]
@@ -74,7 +74,7 @@ namespace ListPLaylistV2.Controllers.Spotify
             if (tracks.Await().HasError())
                 return BadRequest();
 
-            return Ok(JsonConvert.SerializeObject(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
+            return Ok(Json(tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList()));
         }
 
         // POST: api/Spotify
