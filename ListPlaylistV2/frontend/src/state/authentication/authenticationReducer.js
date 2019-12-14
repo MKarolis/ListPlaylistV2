@@ -22,7 +22,7 @@ const authenticationReducer = (state = initialState, action) => {
                 googleUserName: action.payload.username,
                 googleAccessToken: action.payload.token,
                 authenticatedWithGoogle: true,
-                googleExpiresAt: action.expiresAt
+                googleExpiresAt: action.payload.expiresAt
             };
         case LOGOUT_GOOGLE:
             return {
@@ -46,12 +46,8 @@ const authenticationReducer = (state = initialState, action) => {
         case LOGOUT:
             return {...initialState};
         default:
-            return {
-                ...state,
-            };
+            return state;
     }
-
-    return state;
-}
+};
 
 export default authenticationReducer;
