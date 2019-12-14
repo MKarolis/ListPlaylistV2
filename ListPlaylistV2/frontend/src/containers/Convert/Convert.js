@@ -13,15 +13,13 @@ class Convert extends React.Component {
 	render() {
 		const { spotifyUser } = this.props;
 		return (
-			<div className="flex-column">
-				<div className="row">
+			<div className="container">
+				<div className=" center-div">
 					<h1 className="convert-heading">Select playlist to move</h1>
 				</div>
-				<div className="row">
-					<SpotifyTable />
-				</div>
-				<div className="row">
-					<ConvertButton />
+				<SpotifyTable />
+				<div className="center-div high-container">
+					<ConvertButton className="cnv-btn" />
 				</div>
 			</div>
 		);

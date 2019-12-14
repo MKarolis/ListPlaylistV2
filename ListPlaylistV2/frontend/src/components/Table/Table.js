@@ -3,14 +3,12 @@ import './Table.css';
 import { Table } from 'antd';
 // import logo from './../../assets/images/spotify-logo.svg';
 import axios from 'axios';
+import spotifyLogo from './../../assets/images/spotify-yellow.svg';
+import { Ellipsis } from 'react-bootstrap/PageItem';
 
-const me = 'nzwazeib4qbxbmx6p1xajlxei';
-const user_id = me;
 var token =
 	'Bearer BQAfHx28I8YrUHXB7KBoheJUzOXuFMDCcqXwbRLFtZ6iCcpTtZqh3_6G4Tzc1xEL3UXUcO_IoNoGdvaUP-1ON_tNB26aJMFQ-qpB_6lEplb9XCjPQckXazFiYJkWasZR3CRFXNNRjn-BuC23FOWVlDSgtfAl68EUjVfVXFkzTTG3CzY';
 var request = require('request');
-var playlist_url = `https://api.spotify.com/v1/users/${user_id}/playlists`;
-var test_url = 'https://jsonplaceholder.typicode.com/todos';
 
 // export class SpotifyTable extends React.Component {
 // 		state = {
@@ -27,17 +25,17 @@ var test_url = 'https://jsonplaceholder.typicode.com/todos';
 
 const columns = [
 	{
-		title: 'Name',
-		dataIndex: 'name',
-		render: text => <a>{text}</a>
+		dataIndex: 'image',
+		render: image => <img src={spotifyLogo} alt="spotify-logo" />,
+		width: 80
 	},
 	{
-		title: 'Age',
-		dataIndex: 'age'
+		title: 'All spotify playlists ',
+		dataIndex: 'name'
 	},
 	{
-		title: 'Address',
-		dataIndex: 'address'
+		title: '',
+		dataIndex: 'songNum'
 	}
 ];
 
@@ -45,39 +43,57 @@ const columns = [
 const data = [
 	{
 		key: '1',
-		name: 'John Brown',
-		age: 32,
-		address: 'New York No. 1 Lake Park'
+		image: 'John Brown',
+		name: 'hey guys',
+		songNum: 51
 	},
 	{
 		key: '2',
-		name: 'Jim Green',
-		age: 42,
-		address: 'London No. 1 Lake Park'
+		image: 'Jim Green',
+		name: 'this is an edge case testing extremely lengthy playlist names',
+		songNum: 32
 	},
 	{
 		key: '3',
-		name: 'Joe Black',
-		age: 32,
-		address: 'Sidney No. 1 Lake Park'
+		image: 'Joe Black',
+		name: 'a wave washes over me',
+		songNum: 22
 	},
 	{
 		key: '4',
-		name: 'Disabled User',
-		age: 99,
-		address: 'Sidney No. 1 Lake Park'
+		image: 'Disabled User',
+		name: 'sungs',
+		songNum: 42
 	},
 	{
 		key: '5',
-		name: 'Jim Green',
-		age: 41,
-		address: 'London No. 1 Lake Park'
+		image: 'Jim Green',
+		name: 'Best playlist',
+		songNum: 12
 	},
 	{
 		key: '6',
-		name: 'John Brown',
-		age: 30,
-		address: 'New York No. 1 Lake Park'
+		image: 'Disabled User',
+		name: 'sungs',
+		songNum: 42
+	},
+	{
+		key: '7',
+		image: 'Disabled User',
+		name: 'sungs',
+		songNum: 42
+	},
+	{
+		key: '8',
+		image: 'Disabled User',
+		name: 'sungs',
+		songNum: 42
+	},
+	{
+		key: '9',
+		image: 'Disabled User',
+		name: 'sungs',
+		songNum: 42
 	}
 ];
 
@@ -91,13 +107,14 @@ const rowSelection = {
 		);
 	},
 	getCheckboxProps: record => ({
-		disabled: record.name === 'Disabled User', // Column configuration not to be checked
 		name: record.name
 	})
 };
 
 export const spotifyTable = () => (
 	<Table
+		pagination={false}
+		scroll={{ y: 349 }}
 		className="spotify-table"
 		rowSelection={rowSelection}
 		columns={columns}
