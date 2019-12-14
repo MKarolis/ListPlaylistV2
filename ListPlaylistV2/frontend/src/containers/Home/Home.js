@@ -58,6 +58,7 @@ class Home extends React.Component {
 							</a>
 							<GoogleLogin
 								clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
+								scope="https://www.googleapis.com/auth/youtube"
 								render={renderProps => (
 									<button onClick={renderProps.onClick} disabled={renderProps.disabled} className="google login-btn">
 										<img

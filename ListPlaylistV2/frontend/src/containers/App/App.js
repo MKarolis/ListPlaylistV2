@@ -4,6 +4,8 @@ import NavigationBar from '../../components/Navbar/Navbar';
 import Home from '../Home/Home';
 import Convert from '../Convert/Convert';
 
+import ProtectedRoute from "../Routes/ProtectedRoute";
+
 import './App.css';
 import CallbackSpotify from "../CallbackSpotify/CallbackSpotify";
 
@@ -22,7 +24,7 @@ function App(props) {
 				<Router history={props.history}>
 					<Switch>
 						<Route exact path="/" component={Home} />
-						<Route exact path="/convert" component={Convert} />
+						<ProtectedRoute exact path="/convert" component={Convert} />
 						<Route path="/spotifyCallback" component={CallbackSpotify}/>
 						<Route component={NotFound} />
 					</Switch>
