@@ -36,7 +36,7 @@ const playlistsReducer = (state = initialState, action) => {
         case REQUEST_PLAYLISTS_SUCCESS:
             return {
                 ...state,
-                isLoading: false,
+                /*isLoading: false,*/
                 hasError: false,
                 playlists: action.payload,
             }
