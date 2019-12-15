@@ -14,8 +14,13 @@ class Convert extends React.Component {
     }
 
     componentDidMount() {
-		const { source, googleToken, spotifyToken, fetchPlaylists } = this.props;
-		/*if (!source) {
+		const {
+			source, googleToken, spotifyToken, fetchPlaylists
+		} = this.props;
+
+		console.log("Heyyyy " + source);
+
+		if (!source) {
 			this.props.history.push('/source-select');
 		}
 
@@ -27,12 +32,12 @@ class Convert extends React.Component {
                 fetchPlaylists(source, googleToken);
 				break;
 			default:
-		}*/
+		}
     }
 
 	render() {
         const {
-             playlists, source, isLoading,
+             isLoading,
         } = this.props;
 		return (
 			<React.Fragment>

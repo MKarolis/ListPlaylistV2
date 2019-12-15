@@ -6,7 +6,8 @@ import { PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE } from "../../../state
 const columnsSpotify = [
     {
         dataIndex: 'imageUrl',
-        render: imageUrl => <img src={imageUrl} width={80} alt="spotify-logo" />,
+        render: imageUrl => (imageUrl ? <img src={imageUrl} width={80} alt="playlist-logo" /> :
+                                        <img src={spotifyLogo} width={80} alt="spotify-logo"/>)
     },
     {
         title: 'Playlist title',
@@ -24,14 +25,22 @@ const columnsSpotify = [
 
 const columnsYoutube = [
     {
-        dataIndex: 'image',
-        render: image => <img src={youtubeLogo} alt="youtube-logo" />,
-        width: 80
+        dataIndex: 'imageUrl',
+        render: imageUrl => (imageUrl ? <img src={imageUrl} width={80} alt="playlist-logo" /> :
+                                        <img src={youtubeLogo} width={80} alt="youtube-logo"/>)
     },
     {
-        title: 'Video name',
-        dataIndex: 'name'
+        title: 'Playlist title',
+        dataIndex: 'title'
     },
+    {
+        title: 'Video count',
+        dataIndex: 'songCout'
+    },
+    {
+        title: 'Owner',
+        dataIndex: 'owner'
+    }
 ];
 
 const rowSelectionSpotify = {
