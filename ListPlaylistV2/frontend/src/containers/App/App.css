@@ -46,11 +46,15 @@ button{
 .standart-btn{
 	width: 230px;
 	height: 55px;
+	background-color: #0D476F;
+	color: #edf5e1;
+	border: none;
 	border-radius: 30px;
 	transition: all 0.25s ease-out;
 }
 .standart-btn:hover{
 	width: 240px;
+	background-color: #145572;
 	margin-left: -5px;
 }
 .standart-btn span{
