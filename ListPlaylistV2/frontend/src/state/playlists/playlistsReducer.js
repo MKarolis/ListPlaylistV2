@@ -20,11 +20,13 @@ const playlistsReducer = (state = initialState, action) => {
         case SET_PLAYLIST_SOURCE:
             return {
                 ...state,
+                playlists: [],
                 source: action.payload
             };
         case UNSET_PLAYLIST_SOURCE:
             return {
                 ...state,
+                playlists: [],
                 source: null
             };
         case REQUEST_PLAYLISTS:

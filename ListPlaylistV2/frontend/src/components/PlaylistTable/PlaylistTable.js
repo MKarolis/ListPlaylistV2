@@ -15,6 +15,8 @@ class PlaylistTable extends React.Component {
 			playlists, source
 		} = this.props;
 
+		console.log(source);
+
 		const columns = getColumns(source);
 
 		return (
