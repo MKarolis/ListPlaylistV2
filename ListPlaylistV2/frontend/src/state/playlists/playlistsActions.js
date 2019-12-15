@@ -45,7 +45,7 @@ const mapResponseToPlaylistObject = (source, response) => {
                     imageUrl: pl.images[0].url,
                     title: pl.name,
                     owner: pl.owner.displayName,
-                    source: source,
+                    source: "Spotify",
                     songCount: pl.tracks.total
                 };
                 playlists.push(playlistObj);

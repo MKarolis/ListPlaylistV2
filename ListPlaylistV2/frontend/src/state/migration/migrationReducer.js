@@ -1,10 +1,11 @@
 import {
-    START_MIGRATION, FINISH_MIGRATION
+    START_MIGRATION, FINISH_MIGRATION, RESET_MIGRATION_STATE
 } from "./migrationActionTypes";
 
 let initialState = {
     isBeingConverted: false,
-    playlistConverted: false
+    playlistConverted: false,
+    generatedGoogleLink: ''
 };
 
 const migrationReducer = (state = initialState, action) => {
@@ -21,6 +22,8 @@ const migrationReducer = (state = initialState, action) => {
                 isBeingConverted: false,
                 playlistConverted: true
             };
+        case RESET_MIGRATION_STATE:
+            return {...initialState};
         default:
             return state;
     }

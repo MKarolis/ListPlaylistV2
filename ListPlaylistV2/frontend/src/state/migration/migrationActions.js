@@ -1,5 +1,5 @@
 import {
-    START_MIGRATION, FINISH_MIGRATION
+    START_MIGRATION, FINISH_MIGRATION, RESET_MIGRATION_STATE
 } from './migrationActionTypes';
 import { MIGRATION_SOURCE_SPOTIFY, MIGRATION_SOURCE_YOUTUBE } from './migrationSources';
 import axios from 'axios';
@@ -21,20 +21,11 @@ export const finishMigration = () =>{
     }
 };
 
-/*
-export const setMigrationSource = (source) => {
+export const resetMigrationState = () => {
     return dispatch => {
         dispatch({
-            type: SET_MIGRATION_SOURCE,
-            payload: source,
-        });
+            type: RESET_MIGRATION_STATE
+        })
     }
 };
 
-export const unsetMigrationSource = () => {
-    return dispatch => {
-        dispatch({
-            type: UNSET_MIGRATION_SOURCE,
-        });
-    }
-}*/
