@@ -6,6 +6,8 @@
     LOGOUT
 } from './authenticationActionTypes';
 
+import {resetMigrationState} from "../migration/migrationActions";
+
 import { UNSET_PLAYLIST_SOURCE } from '../playlists/playlistsActionTypes';
 
 export const loginWithGoogle = (username, token, expiresAt) => {
@@ -54,6 +56,6 @@ export const completeLogout = () => {
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
         });
-
+        dispatch(resetMigrationState());
     };
 };

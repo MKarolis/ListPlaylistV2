@@ -18,7 +18,10 @@
     font-size: 28px;
     line-height: 34px;
     margin-bottom: 10px;
-    font-weight: 700;
+    font-weight: 500;
+}
+.playlist-title{
+    font-weight: 700 !important;
 }
 .transfer-controls-holder{
     display: grid;

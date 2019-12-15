@@ -7,9 +7,9 @@ import storage from 'redux-persist/lib/storage';
 import reducers from "./reducers";
 
 const persistConfig = {
-    key: 'root',
+    key: 'primary',
     storage,
-}
+};
 
 const persistedReducer = persistReducer(persistConfig, reducers);
 

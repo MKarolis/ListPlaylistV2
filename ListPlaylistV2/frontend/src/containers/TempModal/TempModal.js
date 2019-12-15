@@ -8,7 +8,7 @@ class TempModal extends React.Component{
     }
     render() {
         return(
-            <PlaylistTransferModal show={true} />
+            <PlaylistTransferModal show={true} history={this.props.history} />
         );
     }
 }
