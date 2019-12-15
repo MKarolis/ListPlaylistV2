@@ -108,6 +108,7 @@ namespace ListPLaylistV2
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:3000");
                 }
             });
+
         }
     }
 }
