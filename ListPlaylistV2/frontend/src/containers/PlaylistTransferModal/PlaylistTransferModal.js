@@ -15,7 +15,8 @@ class PlaylistTransferModal extends React.Component{
             <Modal show={this.props.show} onHide={this.props.onHide} size="xl" centered>
                 <Modal.Body className="migration-modal-body">
                     <ModalTransferDialog/>
-                    <ModalTransferSuccessDialog/>
+                    {/*
+                    <ModalTransferSuccessDialog/>*/}
                 </Modal.Body>
             </Modal>
         );

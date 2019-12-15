@@ -34,7 +34,6 @@ class Convert extends React.Component {
         const {
              playlists, isLoading,
         } = this.props;
-
 		return (
 			<React.Fragment>
 				{isLoading ? (
@@ -59,7 +58,7 @@ const mapStateToProps = state => ({
 	googleToken: state.authentication.googleAccessToken,
 	spotifyToken: state.authentication.spotifyAccessToken,
 	source: state.playlists.source,
-	isLoading: state.playlists.loading,
+	isLoading: state.playlists.isLoading,
 	playlists: state.playlists.playlists,
 });
 
