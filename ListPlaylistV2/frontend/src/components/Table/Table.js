@@ -30,13 +30,11 @@ const columns = [
 	},
 	{
 		title: 'Song title ',
-		dataIndex: 'name',
-		width: 350
+		dataIndex: 'name'
 	},
 	{
 		title: 'Song count',
-		dataIndex: 'songNum',
-		width: 200
+		dataIndex: 'songNum'
 	},
 	{
 		title: 'Owner',
