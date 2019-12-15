@@ -21,13 +21,13 @@ class Convert extends React.Component {
 
         switch (source) {
 			case PLAYLIST_SOURCE_SPOTIFY:
-				fetchPlaylists(source, spotifyToken);
-				break;
+                fetchPlaylists(source, spotifyToken);
+                break;
 			case PLAYLIST_SOURCE_YOUTUBE:
                 fetchPlaylists(source, googleToken);
 				break;
 			default:
-        }
+		}
     }
 
 	render() {
@@ -60,10 +60,11 @@ const mapStateToProps = state => ({
 	spotifyToken: state.authentication.spotifyAccessToken,
 	source: state.playlists.source,
 	isLoading: state.playlists.loading,
+	playlists: state.playlists.playlists,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	fetchPlaylists: () => dispatch(playlistsActions.fetchPlaylists()),
+	fetchPlaylists: (source, accessToken) => dispatch(playlistsActions.fetchPlaylists(source, accessToken)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Convert);
