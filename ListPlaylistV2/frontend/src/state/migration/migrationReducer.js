@@ -1,25 +1,22 @@
 import {
-    SET_PLAYLIST_SOURCE,
-    UNSET_PLAYLIST_SOURCE
+    SET_MIGRATION_SOURCE,
+    UNSET_MIGRATION_SOURCE,
 } from "./migrationActionTypes";
 
 let initialState = {
-    sourceSet: false,
-    source: null
+    
 };
 
 const migrationReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_PLAYLIST_SOURCE:
+        case SET_MIGRATION_SOURCE:
             return {
                 ...state,
-                sourceSet: true,
                 source: action.payload
             };
-        case UNSET_PLAYLIST_SOURCE:
+        case UNSET_MIGRATION_SOURCE:
             return {
                 ...state,
-                sourceSet: false,
                 source: null
             };
         default:

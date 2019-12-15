@@ -6,7 +6,7 @@ import spotifyLogoBlue from '../../assets/images/spotify-blue.svg';
 import youtubeLogoBlue from '../../assets/images/youtube-blue.svg';
 
 import * as CONSTANTS from '../../constants/Constants';
-import * as migrateActions from '../../state/migration/migrationActions';
+import * as playlistsActions from '../../state/playlists/playlistsActions';
 
 class SourceSelect extends React.Component {
 	constructor(props) {
@@ -51,7 +51,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch) =>({
-	setPlaylistSource: (source) => dispatch(migrateActions.setPlaylistSource(source))
+	setPlaylistSource: (source) => dispatch(playlistsActions.setPlaylistSource(source))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SourceSelect);
