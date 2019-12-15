@@ -7,6 +7,8 @@ import Convert from '../Convert/Convert';
 
 import ProtectedRoute from "../Routes/ProtectedRoute";
 
+import TempModal from "../TempModal/TempModal";
+
 import './App.css';
 import CallbackSpotify from "../CallbackSpotify/CallbackSpotify";
 
@@ -28,6 +30,7 @@ function App(props) {
 						<ProtectedRoute history={props.history}  exact path='/source-select' component={SourceSelect} />
 						<ProtectedRoute history={props.history} exact path="/convert" component={Convert} />
 						<Route path="/spotifyCallback" component={CallbackSpotify}/>
+						<Route path="/modal" component={TempModal}/>
 						<Route component={NotFound} />
 					</Switch>
 				</Router>
