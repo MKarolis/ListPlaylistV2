@@ -1,5 +1,4 @@
 import React from 'react';
-import spotifyLogo from '../../assets/images/spotify-logo.png';
 import { connect } from 'react-redux';
 import './Convert.css';
 import PlaylistTable from '../../components/PlaylistTable/PlaylistTable';
@@ -17,8 +16,6 @@ class Convert extends React.Component {
 		const {
 			source, googleToken, spotifyToken, fetchPlaylists
 		} = this.props;
-
-		console.log("Heyyyy " + source);
 
 		if (!source) {
 			this.props.history.push('/source-select');

@@ -3,7 +3,7 @@ import './PlaylistTable.css';
 import { Table } from 'antd';
 import { connect } from 'react-redux';
 import { getColumns } from "./utils/constants";
-import { data } from './utils/mockData';
+import { setSelectedPlaylist } from "../../state/playlists/playlistsActions";
 
 class PlaylistTable extends React.Component {
 	constructor(props) {
@@ -12,10 +12,32 @@ class PlaylistTable extends React.Component {
 
 	render() {
 		const {
-			playlists, source
+			playlists, source, setSelectedPlaylist,
 		} = this.props;
 
-		console.log(source);
+		let key = 0;
+		playlists.map(playlist => {
+			key++;
+			return {
+				...playlist,
+				key
+			};
+		});
+
+		const rowSelection = {
+			onChange: (selectedRowKeys, selectedRows) => {
+				console.log(
+					`selectedRowKeys: ${selectedRowKeys}`,
+					'selectedRows: ',
+					selectedRows
+				);
+				setSelectedPlaylist(selectedRows[0]);
+			},
+			getCheckboxProps: record => ({
+				name: record.name
+			}),
+			type: 'radio',
+		};
 
 		const columns = getColumns(source);
 
@@ -24,7 +46,7 @@ class PlaylistTable extends React.Component {
 				pagination={false}
 				scroll={{ y: 349 }}
 				className="spotify-table"
-				// rowSelection={rowSelection}
+				rowSelection={rowSelection}
 				columns={columns}
 				dataSource={playlists}
 				rowClassName={(record, index) =>
@@ -42,6 +64,11 @@ class PlaylistTable extends React.Component {
 const mapStateToProps = (state) => ({
 	playlists: state.playlists.playlists,
 	source: state.playlists.source,
+	selectedPlaylist: state.playlists.selectedPlaylist,
 });
 
-export default connect(mapStateToProps)(PlaylistTable);
+const mapDispatchToProps = (dispatch) => ({
+	setSelectedPlaylist: (playlist) => dispatch(setSelectedPlaylist(playlist)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlaylistTable);
