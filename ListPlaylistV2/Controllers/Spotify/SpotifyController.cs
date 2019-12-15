@@ -129,18 +129,17 @@ namespace ListPLaylistV2.Controllers.Spotify
 
             // return Ok(spotifyPlaylist.Result.Error.Message);
 
+            List<String> uris = new List<string>();
+
             foreach (var query in queries)
             {
-                //
-                var foundTrackUri = _spotify.SearchItemsAsync(query, SearchType.Track).Result.Tracks.Items.First().Uri;
-                ErrorResponse error = _spotify.AddPlaylistTrackAsync(spotifyPlaylist.Result.Id, foundTrackUri).Result;
-                if (error.HasError())
-                {
-                    // do smth later
-                }
+                var foundTracks = _spotify.SearchItemsAsync(query, SearchType.Track).Result.Tracks.Items;
+
+                if (foundTracks.Count != 0)
+                    await _spotify.AddPlaylistTrackAsync(spotifyPlaylist.Result.Id, foundTracks.First().Uri);
             }
 
-            return Ok(Json(spotifyPlaylist.Result.Uri));
+            return Created(spotifyPlaylist.Result.Uri, null);
         }
 
         public string FormatTitle(string title)
