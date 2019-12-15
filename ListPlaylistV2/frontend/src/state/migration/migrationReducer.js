@@ -1,23 +1,25 @@
 import {
-    SET_MIGRATION_SOURCE,
-    UNSET_MIGRATION_SOURCE,
+    START_MIGRATION, FINISH_MIGRATION
 } from "./migrationActionTypes";
 
 let initialState = {
-    
+    isBeingConverted: false,
+    playlistConverted: false
 };
 
 const migrationReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_MIGRATION_SOURCE:
+        case START_MIGRATION:
             return {
                 ...state,
-                source: action.payload
+                isBeingConverted: true,
+                playlistConverted: false
             };
-        case UNSET_MIGRATION_SOURCE:
+        case FINISH_MIGRATION:
             return {
                 ...state,
-                source: null
+                isBeingConverted: false,
+                playlistConverted: true
             };
         default:
             return state;

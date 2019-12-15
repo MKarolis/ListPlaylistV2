@@ -22,7 +22,40 @@ export const unsetPLaylistSource = () => {
             type: UNSET_PLAYLIST_SOURCE,
         });
     }
-}
+};
+
+const mapResponseToPlaylistObject = (source, response) => {
+    let playlistObj = {
+        id: '',
+        imageUrl: '',
+        title: '',
+        owner: '',
+        source: '',
+        songCount: 0
+    };
+
+    let playlists = [];
+
+    switch(source){
+        case PLAYLIST_SOURCE_SPOTIFY:
+            response.value.map(pl => {
+                playlistObj = {
+                    ...playlistObj,
+                    id: pl.id,
+                    imageUrl: pl.images[0].url,
+                    title: pl.name,
+                    owner: pl.owner.displayName,
+                    source: source,
+                    songCount: pl.tracks.total
+                };
+                playlists.push(playlistObj);
+            });
+            break;
+
+        case PLAYLIST_SOURCE_YOUTUBE:
+    }
+    return playlists;
+};
 
 export const fetchPlaylists = (source, accessToken) => {
     return async dispatch => {
@@ -46,7 +79,10 @@ export const fetchPlaylists = (source, accessToken) => {
             .get(`${WEB_APP_URL}${sourceEndpoint}`, { headers: requestHeaders })
             .then(response => {
                 console.log(response);
-                dispatch(requestPlaylistsSuccess(response.data.value));
+
+                let playlists = mapResponseToPlaylistObject(source, response.data);
+
+                dispatch(requestPlaylistsSuccess(playlists));
             })
             .catch(e => {
                 console.log(e);
