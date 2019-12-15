@@ -36,17 +36,17 @@ const playlistsReducer = (state = initialState, action) => {
         case REQUEST_PLAYLISTS_SUCCESS:
             return {
                 ...state,
-                /*isLoading: false,*/
+                isLoading: false,
                 hasError: false,
                 playlists: action.payload,
-            }
+            };
         case REQUEST_PLAYLISTS_ERROR:
             return {
                 ...state,
                 isLoading: false,
                 hasError: true,
                 error: action.payload,
-            }
+            };
         default:
             return state;
     }

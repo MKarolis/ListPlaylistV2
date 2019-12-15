@@ -26,7 +26,7 @@ export const unsetPLaylistSource = () => {
 
 export const fetchPlaylists = (source, accessToken) => {
     return async dispatch => {
-        dispatch(requestPlaylists);
+        dispatch(requestPlaylists());
 
         let sourceEndpoint = "/";
         let requestHeaders = {};
