@@ -56,9 +56,11 @@ class Home extends React.Component {
 					</div>
 					{loggedInSpotify && loggedInGoogle ?
 					<div className="row">
-						<button className="button standart-btn">
-							<span>LET'S GO!</span>
-						</button>
+						<a href="/source-select">
+							<button className="button standart-btn">
+								<span>LET'S GO!</span>
+							</button>
+						</a>
 					</div> :
 					<div className="row">
 						<div className="login-button-container">

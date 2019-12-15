@@ -37,14 +37,12 @@ namespace ListPLaylistV2.Controllers.Google
             return "Test";
         }
 
-        //auth both spotify and youtube
-        //create blank playlist
-        //insert all the songs from spotify
-        //return playlist
+        // Convertion progress, Duplex services 
+        // HttpPost
 
-        [HttpGet("playlist")]
+        [HttpPost("playlist")]
         // [Authorize]
-        public async Task<string> MigratePlaylist([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
+        public async Task<IActionResult> MigratePlaylist([FromHeader] string googleAuthToken, [FromHeader] string spotifyAuthToken, [FromHeader] string playlistId)
         {
             /* Spotify */
             _spotify = new SpotifyWebAPI()
@@ -53,12 +51,19 @@ namespace ListPLaylistV2.Controllers.Google
                 AccessToken = spotifyAuthToken
             };
 
+            // Get playlist
+            Task<FullPlaylist> playlist = _spotify.GetPlaylistAsync(playlistId);
+
+            // Get playlist name
+            string spotifyPlaylistName = playlist.Result.Name;
+
             // Get playlist tracks
-            Task<Paging<PlaylistTrack>> tracks = _spotify.GetPlaylistTracksAsync(playlistId);
+            Paging<PlaylistTrack> spotifyTracks = playlist.Result.Tracks;
 
             List<SpotifyTrack> mappedTracks =
-                tracks.Result.Items.Select(track => SpotifyTrackMapper.map(track)).ToList();
+                spotifyTracks.Items.Select(track => SpotifyTrackMapper.map(track)).ToList();
 
+            // Form queries for Youtube
             List<string> queries = mappedTracks.Select(track =>
             {
                 string Artists = "";
@@ -70,65 +75,44 @@ namespace ListPLaylistV2.Controllers.Google
             }).ToList();
 
             /* Google */
-
             _youtube = new YouTubeService(new BaseClientService.Initializer()
             {
                 HttpClientInitializer = GoogleCredential.FromAccessToken(googleAuthToken),
                 ApplicationName = this.GetType().ToString()
             });
 
-
+            // Create playlist
             var newPlaylist = new Playlist();
             newPlaylist.Snippet = new PlaylistSnippet();
-            newPlaylist.Snippet.Title = "asd";
-            newPlaylist.Snippet.Description = "asd";
+            newPlaylist.Snippet.Title = spotifyPlaylistName;
+            newPlaylist.Snippet.Description = "";
             newPlaylist.Status = new PlaylistStatus();
             newPlaylist.Status.PrivacyStatus = "public";
             var playlistInsertReq = _youtube.Playlists.Insert(newPlaylist, "snippet,status");
             newPlaylist = await playlistInsertReq.ExecuteAsync();
 
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine(queries.Count);
-            System.Diagnostics.Debug.WriteLine("\n");
-            System.Diagnostics.Debug.WriteLine("\n");
-
-            foreach (string stringas in queries)
+            // Add songs based on queries
+            foreach (var query in queries)
             {
-                System.Diagnostics.Debug.WriteLine(stringas);
+                var req = _youtube.Search.List("snippet");
+                req.Q = query;
+                req.Type = "youtube#video";
+                req.MaxResults = 1;
+                req.Order = SearchResource.ListRequest.OrderEnum.Relevance;
 
+                var resp = await req.ExecuteAsync();
+
+                var newPlaylistItem = new PlaylistItem();
+                newPlaylistItem.Snippet = new PlaylistItemSnippet();
+                newPlaylistItem.Snippet.PlaylistId = newPlaylist.Id;
+                newPlaylistItem.Snippet.ResourceId = new ResourceId();
+                newPlaylistItem.Snippet.ResourceId.Kind = "youtube#video";
+                newPlaylistItem.Snippet.ResourceId.VideoId = resp.Items.First().Id.VideoId;
+                var playlistItemInsertReq = _youtube.PlaylistItems.Insert(newPlaylistItem, "snippet");
+                var item = await playlistItemInsertReq.ExecuteAsync();
             }
 
-
-
-
-            /* foreach (var stringas in queries)
-         {
-             Console.WriteLine(stringas);
-
-             var req = _youtube.Search.List("snipper");
-             req.Q = stringas;
-             req.Type = "youtube#video";
-             req.Order = SearchResource.ListRequest.OrderEnum.Relevance;
-
-             var resp = await req.ExecuteAsync();
-
-             var newPlaylistItem = new PlaylistItem();
-             newPlaylistItem.Snippet = new PlaylistItemSnippet();
-             newPlaylistItem.Snippet.PlaylistId = newPlaylist.Id;
-             newPlaylistItem.Snippet.ResourceId = new ResourceId();
-             newPlaylistItem.Snippet.ResourceId.Kind = "youtube#video";
-             newPlaylistItem.Snippet.ResourceId.VideoId = resp.Items.First().Id.ToString();
-             var playlistItemInsertReq = _youtube.PlaylistItems.Insert(newPlaylistItem, "snippet");
-             var item = await playlistItemInsertReq.ExecuteAsync();
-
-         }*/
-
-
-            return newPlaylist.Id;
-
-
-
+            return Created("https://www.youtube.com/playlist?list=" + newPlaylist.Id, null);
         }
     }
 }
