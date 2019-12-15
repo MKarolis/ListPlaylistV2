@@ -10,22 +10,27 @@ class PlaylistTransferModal extends React.Component{
 
     render() {
         return(
-            <Modal show={this.props.show} onHide={this.props.onHide} size="lg" centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Poll results</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h4 className="modal-heading">{this.props.question}</h4>
-                    { this.state.loading ? <SmallLoadingIndicator/> :
-                        this.state.options.map(option => <ResultsBar private={this.props.private} userVotes={option.votes_by_users} percent={option.percentage_of_votes} heading={option.option_text} />)}
+            <Modal show={this.props.show} onHide={this.props.onHide} size="xl" centered>
+                <Modal.Body className="migration-modal-body">
+                    <div className="row">
+                        <div className="col-9">
+                            <div className="playlist-info-holder">
+                                <img className="playlist-modal-img" src="https://pl.scdn.co/images/pl/default/f679b3035cb86817744bdd66753848fb14d85027" />
+                                <div className="playlist-text-holder">
+                                    <p>Zuokai atiduok pinigus</p>
+                                    <p>69 songs</p>
+                                    <p>Owner: Carlos Mendez</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-3">
 
+                        </div>
+                    </div>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={this.props.onHide}>
-                        Close
-                    </Button>
-                </Modal.Footer>
             </Modal>
         );
     }
 }
+
+export default PlaylistTransferModal;

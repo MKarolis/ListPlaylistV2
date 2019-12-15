@@ -1,0 +1,20 @@
+.migration-modal-body{
+    padding: 40px !important;
+    color: #282c34;
+}
+.playlist-info-holder{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.playlist-modal-img{
+    height: 200px;
+}
+.playlist-text-holder{
+    padding: 10px 20px;
+}
+.playlist-text-holder p{
+    font-size: 28px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
