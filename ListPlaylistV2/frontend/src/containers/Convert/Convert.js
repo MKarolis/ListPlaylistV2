@@ -2,7 +2,7 @@ import React from 'react';
 import spotifyLogo from '../../assets/images/spotify-logo.png';
 import { connect } from 'react-redux';
 import './Convert.css';
-import SpotifyTable from '../../components/Table/Table';
+import PlaylistTable from '../../components/PlaylistTable/PlaylistTable';
 import ConvertButton from '../../components/Button/Button';
 import { PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE } from '../../state/playlists/playlistsSources';
 import * as playlistsActions from '../../state/playlists/playlistsActions';
@@ -15,7 +15,7 @@ class Convert extends React.Component {
 
     componentDidMount() {
 		const { source, googleToken, spotifyToken, fetchPlaylists } = this.props;
-		if (!source) {
+		/*if (!source) {
 			this.props.history.push('/source-select');
 		}
 
@@ -27,12 +27,12 @@ class Convert extends React.Component {
                 fetchPlaylists(source, googleToken);
 				break;
 			default:
-		}
+		}*/
     }
 
 	render() {
         const {
-             playlists, isLoading,
+             playlists, source, isLoading,
         } = this.props;
 		return (
 			<React.Fragment>
@@ -43,7 +43,7 @@ class Convert extends React.Component {
 						<div className=" center-div">
 							<h1 className="convert-heading">Select playlist to move</h1>
 						</div>
-						<SpotifyTable playlists={playlists} />
+						<PlaylistTable/>
 						<div className="center-div high-container">
 							<ConvertButton className="cnv-btn" />
 						</div>
