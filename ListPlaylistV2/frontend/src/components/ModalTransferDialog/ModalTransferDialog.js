@@ -1,8 +1,10 @@
 import React from "react";
+import {connect} from 'react-redux';
 import LoadingSmall from "../LoadingSmall/LoadingSmall";
 import {Modal} from "react-bootstrap";
 
 function ModalTransferDialog(props) {
+    const {playlist} = this.props;
     return (
         <React.Fragment>
             <div className="row">
@@ -33,5 +35,9 @@ function ModalTransferDialog(props) {
         </React.Fragment>
     );
 }
+const mapStateToProps = (state) =>({
+    //playlist: state.playlists.selectedPlaylist
+    playlist: state.playlists.playlists[0]
+});
 
 export default ModalTransferDialog;
