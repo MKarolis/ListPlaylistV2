@@ -16,7 +16,6 @@
 .convert-btn {
 	position: relative;
 	top: 90%;
-	left: 20;
 }
 .convert-btn:hover {
 	transform: scale(1.03);
