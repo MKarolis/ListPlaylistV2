@@ -6,7 +6,8 @@
     LOGOUT
 } from './authenticationActionTypes';
 
-import {UNSET_PLAYLIST_SOURCE} from "../migration/migrationActionTypes";
+import { UNSET_PLAYLIST_SOURCE } from '../playlists/playlistsActionTypes';
+import { UNSET_MIGRATION_SOURCE } from '../migration/migrationActionTypes';
 
 export const loginWithGoogle = (username, token, expiresAt) => {
     return dispatch => {
@@ -20,12 +21,13 @@ export const logoutFromGoogle = () => {
     return dispatch => {
         dispatch({
             type: LOGOUT_GOOGLE,
-            payload: ""
         });
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
-            payload: ''
         });
+        dispatch({
+            type: UNSET_MIGRATION_SOURCE,
+        })
     }
 };
 
@@ -41,23 +43,25 @@ export const logoutFromSpotify = () => {
     return dispatch => {
         dispatch({
             type: LOGOUT_SPOTIFY,
-            payload: ""
         });
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
-            payload: ''
         });
+        dispatch({
+            type: UNSET_MIGRATION_SOURCE,
+        })
     }
 };
 export const completeLogout = () => {
     return dispatch => {
         dispatch({
             type: LOGOUT,
-            payload: ""
         });
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
-            payload: ''
         });
+        dispatch({
+            type: UNSET_MIGRATION_SOURCE,
+        })
     };
 };
