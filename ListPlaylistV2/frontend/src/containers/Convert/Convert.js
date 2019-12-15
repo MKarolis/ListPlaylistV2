@@ -4,11 +4,8 @@ import { connect } from 'react-redux';
 import './Convert.css';
 import SpotifyTable from '../../components/Table/Table';
 import ConvertButton from '../../components/Button/Button';
-import { WEB_APP_URL } from '../../config/GeneralConfig/GeneralConfig';
 import { PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE } from '../../state/playlists/playlistsSources';
 import * as playlistsActions from '../../state/playlists/playlistsActions';
-
-import axios from 'axios';
 import LoadingWide from '../../components/LoadingWide/LoadingWide';
 
 class Convert extends React.Component {
@@ -68,7 +65,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch) => ({
 	fetchPlaylists: () => dispatch(playlistsActions.fetchPlaylists()),
 });
-
-//export default Home;
 
 export default connect(mapStateToProps, mapDispatchToProps)(Convert);
