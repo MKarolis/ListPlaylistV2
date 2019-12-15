@@ -5,7 +5,7 @@
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
-	width: 800px;
+	width: 960px;
 	height: 349px;
 }
 .ant-table {
@@ -14,11 +14,6 @@
 	line-height: 22px;
 }
 
-.ant-table-row .ant-table-row {
-	height: 69px !important;
-	border-radius: 5px;
-	background-color: #fff;
-}
 /* .ant-table .ant-table-row-level-0 > td {
 	color: #05386b;
 } */
@@ -27,12 +22,15 @@
 	color: #edf5e1;
 	letter-spacing: 0.05em;
 }
+.ant-table-thead > tr > th:nth-child(1) {
+	visibility: hidden;
+}
 .ant-table-header {
 	background: #05386b;
 }
+
 .ant-table-thead > tr > th {
 	background-color: #05386b;
-	height: 55px !important;
 }
 
 /*CHECKBOX STYLING*/
@@ -81,4 +79,10 @@ div::-webkit-scrollbar-track {
 	.spotify-table {
 		width: 70%;
 	}
+}
+
+.margin-top-20 {
+	margin-top: 20px !important;
+	margin-bottom: 20px;
+	border-radius: 20px;
 }

@@ -4,7 +4,6 @@ import { Table } from 'antd';
 // import logo from './../../assets/images/spotify-logo.svg';
 import axios from 'axios';
 import spotifyLogo from './../../assets/images/spotify-yellow.svg';
-import { Ellipsis } from 'react-bootstrap/PageItem';
 
 var token =
 	'Bearer BQAfHx28I8YrUHXB7KBoheJUzOXuFMDCcqXwbRLFtZ6iCcpTtZqh3_6G4Tzc1xEL3UXUcO_IoNoGdvaUP-1ON_tNB26aJMFQ-qpB_6lEplb9XCjPQckXazFiYJkWasZR3CRFXNNRjn-BuC23FOWVlDSgtfAl68EUjVfVXFkzTTG3CzY';
@@ -30,12 +29,18 @@ const columns = [
 		width: 80
 	},
 	{
-		title: 'All spotify playlists ',
-		dataIndex: 'name'
+		title: 'Song title ',
+		dataIndex: 'name',
+		width: 350
 	},
 	{
-		title: '',
-		dataIndex: 'songNum'
+		title: 'Song count',
+		dataIndex: 'songNum',
+		width: 200
+	},
+	{
+		title: 'Owner',
+		dataIndex: 'owner'
 	}
 ];
 
@@ -45,55 +50,64 @@ const data = [
 		key: '1',
 		image: 'John Brown',
 		name: 'hey guys',
-		songNum: 51
+		songNum: 51,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '2',
 		image: 'Jim Green',
 		name: 'this is an edge case testing extremely lengthy playlist names',
-		songNum: 32
+		songNum: 32,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '3',
 		image: 'Joe Black',
 		name: 'a wave washes over me',
-		songNum: 22
+		songNum: 22,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '4',
 		image: 'Disabled User',
 		name: 'sungs',
-		songNum: 42
+		songNum: 42,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '5',
 		image: 'Jim Green',
 		name: 'Best playlist',
-		songNum: 12
+		songNum: 12,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '6',
 		image: 'Disabled User',
 		name: 'sungs',
-		songNum: 42
+		songNum: 42,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '7',
 		image: 'Disabled User',
 		name: 'sungs',
-		songNum: 42
+		songNum: 42,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '8',
 		image: 'Disabled User',
 		name: 'sungs',
-		songNum: 42
+		songNum: 42,
+		owner: 'Bobby Brown'
 	},
 	{
 		key: '9',
 		image: 'Disabled User',
 		name: 'sungs',
-		songNum: 42
+		songNum: 42,
+		owner: 'Bobby Brown'
 	}
 ];
 
@@ -119,6 +133,12 @@ export const spotifyTable = () => (
 		rowSelection={rowSelection}
 		columns={columns}
 		dataSource={data}
+		rowClassName={(record, index) =>
+			index < 0 ? 'your-class-name' : 'margin-top-20'
+		}
+		// onHeaderRow={(record, index) =>
+		// 	index === 0 ? 'your-class-name' : 'first-row'
+		// }
 	/>
 );
 
