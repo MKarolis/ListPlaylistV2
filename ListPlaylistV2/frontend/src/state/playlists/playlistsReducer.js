@@ -11,7 +11,8 @@ let initialState = {
     isLoading: false,
     hasError: false,
     error: null,
-    playlists: null,
+    playlists: [],
+    selectedPlaylist: null,
 };
 
 const playlistsReducer = (state = initialState, action) => {
