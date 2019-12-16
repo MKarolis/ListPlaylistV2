@@ -80,7 +80,7 @@ function ModalTransferDialog(props) {
 								<button
 									className="standart-btn transfer-control-btn"
 									// it's done
-									onClick={(show = false)}
+									// onClick={(show = false)}
 								>
 									CANCEL
 								</button>{' '}
@@ -105,8 +105,8 @@ function ModalTransferDialog(props) {
 	);
 }
 const mapStateToProps = state => ({
-	//playlist: state.playlists.selectedPlaylist
-	playlist: state.playlists.playlists[1],
+	playlist: state.playlists.selectedPlaylist,
+	// playlist: state.playlists.playlists[0],
 	loading: state.migration.isBeingConverted,
 	spotifyToken: state.authentication.spotifyAccessToken,
 	googleToken: state.authentication.googleAccessToken
