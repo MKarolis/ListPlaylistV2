@@ -4,7 +4,7 @@ import migrationReducer from './migration/migrationReducer';
 import playlistsReducer from './playlists/playlistsReducer';
 
 export default combineReducers({
-     authentication: authenticationReducer,
-     migration: migrationReducer,
-     playlists: playlistsReducer,
+	authentication: authenticationReducer,
+	migration: migrationReducer,
+	playlists: playlistsReducer
 });
