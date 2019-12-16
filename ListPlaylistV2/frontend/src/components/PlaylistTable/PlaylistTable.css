@@ -3,6 +3,9 @@
 body {
 	overflow: hidden;
 }
+.radio-button-hover-color {
+	color: black;
+}
 .spotify-table {
 	position: fixed;
 	left: 50%;
@@ -37,27 +40,36 @@ body {
 }
 
 /*CHECKBOX STYLING*/
-.ant-checkbox {
-	height: 30px;
-	width: 30px;
+.ant-radio {
+	height: 26px;
+	width: 26px;
 	border: 3px solid #7ad768;
 	border-radius: 50px;
-	background-color: white;
+	background-color: transparent;
 	margin: auto;
 	position: relative;
 	top: 50%;
 }
-.ant-checkbox-inner {
+
+.ant-radio:hover {
+	border: 3px solid #7ad768 !important;
+}
+.ant-radio-inner {
 	border: none;
+	width: 13px;
+	height: 13px;
 	margin: auto;
 	position: relative;
-	top: 17%;
+	top: 15%;
+}
+.ant-radio-inner::after {
+	background-color: #7ad768;
 }
 
-.ant-checkbox-indeterminate .ant-checkbox-inner::after {
+.ant-radio-indeterminate .ant-radio-inner::after {
 	background-color: white !important;
 }
-.ant-checkbox-checked .ant-checkbox-inner {
+.ant-radio-checked .ant-radio-inner {
 	background-color: #7ad768;
 	border: none;
 	margin: auto;
