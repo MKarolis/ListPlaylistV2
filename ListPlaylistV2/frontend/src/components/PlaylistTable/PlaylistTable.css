@@ -3,6 +3,7 @@
 body {
 	overflow: hidden;
 }
+
 .radio-button-hover-color {
 	color: black;
 }
@@ -56,8 +57,8 @@ body {
 }
 .ant-radio-inner {
 	border: none;
-	width: 13px;
-	height: 13px;
+	width: 14px;
+	height: 14px;
 	margin: auto;
 	position: relative;
 	top: 15%;
@@ -75,17 +76,22 @@ body {
 	margin: auto;
 	border-radius: 50px;
 	position: relative;
-	top: 17%;
+	top: 15%;
 }
 
 /*SCROLLBAR STYLING*/
+
+/* The entire scrollbar. */
 div::-webkit-scrollbar {
 	width: 10px;
-
-	background-color: #05386b;
 }
-div::-webkit-scrollbar-track {
-	width: 10px;
+/*The scrollable part*/
+::-webkit-scrollbar-thumb {
+	background-color: #05386b;
+	border-radius: 20px;
+}
+/*the part of the track (progress bar) not covered by the handle.*/
+div::-webkit-scrollbar-track-piece {
 	background-color: transparent;
 }
 
@@ -95,9 +101,3 @@ div::-webkit-scrollbar-track {
 		width: 70%;
 	}
 }
-
-/* .margin-top-20 {
-	margin-top: 20px !important;
-	margin-bottom: 20px;
-	border-radius: 20px;
-} */
