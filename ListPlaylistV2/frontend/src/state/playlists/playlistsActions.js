@@ -1,7 +1,7 @@
 import {
     SET_PLAYLIST_SOURCE, UNSET_PLAYLIST_SOURCE,
     REQUEST_PLAYLISTS, REQUEST_PLAYLISTS_SUCCESS, REQUEST_PLAYLISTS_ERROR,
-    SET_SELECTED_PLAYLIST,
+    SET_SELECTED_PLAYLIST, UNSET_SELECTED_PLAYLIST,
 } from './playlistsActionTypes';
 
 import { PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE } from './playlistsSources';
@@ -30,7 +30,15 @@ export const setSelectedPlaylist = (playlist) => {
         type: SET_SELECTED_PLAYLIST,
         payload: playlist,
     }
-}
+};
+
+export const unsetSelectedPlaylist = () => {
+    return dispatch => {
+        dispatch({
+            type: UNSET_SELECTED_PLAYLIST
+        })
+    }
+};
 
 const mapResponseToPlaylistObject = (source, response) => {
     let playlistObj = {

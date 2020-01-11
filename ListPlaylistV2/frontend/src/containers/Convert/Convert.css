@@ -13,11 +13,23 @@
 .high-container {
 	height: 600px;
 }
-.convert-btn {
+.convert-btn{
+	background: #05386b;
+	border-radius: 30px;
+	border: none;
+	width: 280px;
+	height: 60px;
+
+	transition: all 200ms ease-in-out;
 	position: relative;
 	top: 90%;
 }
 .convert-btn:hover {
 	transform: scale(1.03);
 	opacity: 0.9;
+}
+.convert-btn:disabled{
+	background-color: #0C616F;
+	transform: none;
+	opacity: 1;
 }
