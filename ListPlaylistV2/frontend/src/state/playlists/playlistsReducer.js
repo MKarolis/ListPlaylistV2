@@ -5,6 +5,7 @@ import {
     REQUEST_PLAYLISTS_SUCCESS,
     REQUEST_PLAYLISTS_ERROR,
     SET_SELECTED_PLAYLIST,
+    UNSET_SELECTED_PLAYLIST,
 } from "./playlistsActionTypes";
 
 let initialState = {
@@ -28,7 +29,8 @@ const playlistsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 playlists: [],
-                source: null
+                source: null,
+                selectedPlaylist: null
             };
         case SET_SELECTED_PLAYLIST:
             return {
@@ -54,6 +56,11 @@ const playlistsReducer = (state = initialState, action) => {
                 isLoading: false,
                 hasError: true,
                 error: action.payload,
+            };
+        case UNSET_SELECTED_PLAYLIST:
+            return{
+                ...state,
+                selectedPlaylist: null
             };
         default:
             return state;
