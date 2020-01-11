@@ -1,5 +1,4 @@
 import { OPEN_MODAL, CLOSE_MODAL } from './modalActionTypes';
-import { WEB_APP_URL } from '../../config/GeneralConfig/GeneralConfig';
 
 export const closeModal = () => {
 	return dispatch => {
