@@ -56,7 +56,7 @@ class Home extends React.Component {
 					</div>
 					{loggedInSpotify && loggedInGoogle ?
 					<div className="row">
-						<a href="/source-select">
+						<a className="margin-auto-mobile" href="/source-select">
 							<button className="button standart-btn">
 								<span>LET'S GO!</span>
 							</button>

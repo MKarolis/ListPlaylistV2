@@ -39,6 +39,12 @@ body {
     .hide-on-mobile {
         display: none;
     }
+    .heading-big{
+        font-size: 6vw;
+    }
+    .margin-auto-mobile{
+        margin: auto;
+    }
 }
 @media (max-width: 400px){
     .hide-on-very-small{
