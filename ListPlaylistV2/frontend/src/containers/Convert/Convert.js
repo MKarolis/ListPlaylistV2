@@ -10,16 +10,12 @@ import {
 import * as playlistsActions from '../../state/playlists/playlistsActions';
 import LoadingWide from '../../components/LoadingWide/LoadingWide';
 import PlaylistTransferModal from '../PlaylistTransferModal/PlaylistTransferModal';
-import store from '../../state/store';
+import { openModal } from '../../state/modal/modalActions';
 
 class Convert extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			show: false
-		};
 	}
-
 	componentDidMount() {
 		const { source, googleToken, spotifyToken, fetchPlaylists } = this.props;
 
@@ -37,17 +33,13 @@ class Convert extends React.Component {
 			default:
 		}
 	}
-	handleClick() {
-		//paspaudus mygtuka turetu but pakeiciamas state
-		this.setState({
-			show: true
-		});
-		console.log(this.state.show);
-		//tada page perkraunamas, tik sikart but modalas
-		this.forceUpdate();
-	}
+	/*DEBUGGING*/
+	// handleClick(e) {
+	// 	e.preventDefault();
+	// 	console.log('sup');
+	// }
 	render() {
-		const { isLoading } = this.props;
+		const { isLoading, openModal } = this.props;
 		return (
 			<React.Fragment>
 				{isLoading ? (
@@ -58,14 +50,15 @@ class Convert extends React.Component {
 							<h1 className="convert-heading">Select playlist to move</h1>
 						</div>
 						<PlaylistTable />
-						<div className="center-div high-container">
-							<ConvertButton className="cnv-btn" onClick={this.handleClick} />
+						<div className="center-div high-container" onClick={openModal}>
+							<ConvertButton className="cnv-btn" />
 						</div>
 					</div>
 				)}
 				<PlaylistTransferModal
-					show={this.state.show}
+					show={this.props.isShown}
 					history={this.props.history}
+					onHide={this.toggleModal}
 				/>
 			</React.Fragment>
 		);
@@ -77,12 +70,14 @@ const mapStateToProps = state => ({
 	spotifyToken: state.authentication.spotifyAccessToken,
 	source: state.playlists.source,
 	isLoading: state.playlists.isLoading,
-	playlists: state.playlists.playlists
+	playlists: state.playlists.playlists,
+	isShown: state.modal.isShown
 });
 
 const mapDispatchToProps = dispatch => ({
 	fetchPlaylists: (source, accessToken) =>
-		dispatch(playlistsActions.fetchPlaylists(source, accessToken))
+		dispatch(playlistsActions.fetchPlaylists(source, accessToken)),
+	openModal: () => dispatch(openModal())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Convert);

@@ -4,14 +4,16 @@ let initialState = {
 	isShown: false
 };
 
-const modalToggler = (state = initialState, action) => {
+const modalReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case OPEN_MODAL:
 			return {
+				...state,
 				isShown: true
 			};
 		case CLOSE_MODAL:
 			return {
+				...state,
 				isShown: false
 			};
 		default:
@@ -19,4 +21,4 @@ const modalToggler = (state = initialState, action) => {
 	}
 };
 
-export default modalToggler;
+export default modalReducer;

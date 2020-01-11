@@ -9,6 +9,8 @@ import {
 	finishMigration,
 	resetMigrationState
 } from '../../state/migration/migrationActions';
+import { closeModal } from '../../state/modal/modalActions';
+
 import axios from 'axios';
 
 const migrate = (
@@ -41,7 +43,7 @@ const migrate = (
 };
 
 function ModalTransferDialog(props) {
-	const { playlist, loading, spotifyToken, googleToken, show } = props;
+	const { playlist, loading, spotifyToken, googleToken, closeModal } = props;
 	//props.resetMigrationState();
 	return (
 		<React.Fragment>
@@ -80,7 +82,7 @@ function ModalTransferDialog(props) {
 								<button
 									className="standart-btn transfer-control-btn"
 									// it's done
-									// onClick={(show = false)}
+									onClick={closeModal}
 								>
 									CANCEL
 								</button>{' '}
@@ -115,7 +117,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	startMigration: () => dispatch(startMigration()),
 	finishMigration: () => dispatch(finishMigration()),
-	resetMigrationState: () => dispatch(resetMigrationState())
+	resetMigrationState: () => dispatch(resetMigrationState()),
+	closeModal: () => dispatch(closeModal())
 });
 
 export default connect(
