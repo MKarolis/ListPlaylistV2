@@ -1,31 +1,40 @@
-import React from "react";
-import {Modal} from 'react-bootstrap'
+import React from 'react';
+import { Modal } from 'react-bootstrap';
+
+import { connect } from 'react-redux';
 
 import './PlaylistTransferModal.css';
+import ModalTransferDialog from '../../components/ModalTransferDialog/ModalTransferDialog';
+import ModalTransferSuccessDialog from '../../components/ModalTransferSuccessDialog/ModalTransferSuccessDialog';
 
-class PlaylistTransferModal extends React.Component{
-    constructor(props){
-        super(props);
-    }
+class PlaylistTransferModal extends React.Component {
+	constructor(props) {
+		super(props);
+	}
 
-    render() {
-        return(
-            <Modal show={this.props.show} onHide={this.props.onHide} size="lg" centered>
-                <Modal.Header closeButton>
-                    <Modal.Title>Poll results</Modal.Title>
-                </Modal.Header>
-                <Modal.Body>
-                    <h4 className="modal-heading">{this.props.question}</h4>
-                    { this.state.loading ? <SmallLoadingIndicator/> :
-                        this.state.options.map(option => <ResultsBar private={this.props.private} userVotes={option.votes_by_users} percent={option.percentage_of_votes} heading={option.option_text} />)}
-
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="primary" onClick={this.props.onHide}>
-                        Close
-                    </Button>
-                </Modal.Footer>
-            </Modal>
-        );
-    }
+	render() {
+		const { finishedConverting } = this.props;
+		return (
+			<Modal
+				show={this.props.show}
+				onHide={this.props.onHide}
+				size="xl"
+				centered
+			>
+				<Modal.Body className="migration-modal-body">
+					{!finishedConverting ? (
+						<ModalTransferDialog />
+					) : (
+						<ModalTransferSuccessDialog history={this.props.history} />
+					)}
+				</Modal.Body>
+			</Modal>
+		);
+	}
 }
+
+const mapStateToProps = state => ({
+	finishedConverting: state.migration.playlistConverted
+});
+
+export default connect(mapStateToProps)(PlaylistTransferModal);

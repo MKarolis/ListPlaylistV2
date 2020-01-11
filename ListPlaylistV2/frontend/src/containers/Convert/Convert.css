@@ -1,9 +1,23 @@
+.center-div {
+	margin: 0 auto;
+}
 .convert-heading {
 	font-style: normal;
 	font-weight: bold;
 	font-size: 48px;
 	line-height: 59px;
-	text-align: center;
 	letter-spacing: 0.05em;
 	color: #edf5e1;
+}
+
+.high-container {
+	height: 600px;
+}
+.convert-btn {
+	position: relative;
+	top: 90%;
+}
+.convert-btn:hover {
+	transform: scale(1.03);
+	opacity: 0.9;
 }

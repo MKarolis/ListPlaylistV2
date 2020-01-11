@@ -1,0 +1,57 @@
+.migration-modal-body{
+    padding: 40px !important;
+    color: #404040;
+}
+.playlist-info-holder{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+.playlist-modal-img{
+    height: 200px;
+}
+.playlist-text-holder{
+    padding: 10px 20px;
+}
+
+.playlist-text-holder p{
+    font-size: 28px;
+    line-height: 34px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.playlist-title{
+    font-weight: 700 !important;
+}
+.transfer-controls-holder{
+    display: grid;
+}
+
+.standart-btn.transfer-control-btn{
+    width: 200px;
+    margin: 10px auto;
+}
+
+.standart-btn.transfer-control-btn:hover{
+    width: 210px;
+    margin-left: auto;
+}
+.playlist-link-holder{
+    width:min-content;
+    margin: auto;
+}
+
+.playlist-migration-tip,
+.playlist-migration-heading{
+    font-size: 28px;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+}
+.playlist-migration-tip{
+    font-weight: 500;
+}
+.playlist-migration-heading{
+    font-weight: 700;
+    margin-bottom: 40px;
+}

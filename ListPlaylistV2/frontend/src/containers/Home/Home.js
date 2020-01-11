@@ -73,7 +73,7 @@ class Home extends React.Component {
 								<span>Login with Spotify</span>
 							</button>
 							<GoogleLogin
-								clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID}
+								clientId={process.env.REACT_APP_GOOGLE_AUTH_CLIENT_ID_2}
 								scope="https://www.googleapis.com/auth/youtube"
 								disabled={!!loggedInGoogle}
 								render={renderProps => (

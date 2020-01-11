@@ -1,19 +1,31 @@
-import {SET_PLAYLIST_SOURCE, UNSET_PLAYLIST_SOURCE} from "./migrationActionTypes";
+import {
+    START_MIGRATION, FINISH_MIGRATION, RESET_MIGRATION_STATE
+} from './migrationActionTypes';
+import { MIGRATION_SOURCE_SPOTIFY, MIGRATION_SOURCE_YOUTUBE } from './migrationSources';
+import axios from 'axios';
+import { WEB_APP_URL } from '../../config/GeneralConfig/GeneralConfig';
 
-export const setPlaylistSource = (source) => {
+export const startMigration = () =>{
     return dispatch => {
         dispatch({
-            type: SET_PLAYLIST_SOURCE,
-            payload: source
-        });
+            type: START_MIGRATION
+        })
     }
 };
 
-export const unsetPLaylistSource = () => {
+export const finishMigration = () =>{
     return dispatch => {
         dispatch({
-           type: UNSET_PLAYLIST_SOURCE,
-           payload: ''
-        });
+            type: FINISH_MIGRATION
+        })
     }
-}
+};
+
+export const resetMigrationState = () => {
+    return dispatch => {
+        dispatch({
+            type: RESET_MIGRATION_STATE
+        })
+    }
+};
+

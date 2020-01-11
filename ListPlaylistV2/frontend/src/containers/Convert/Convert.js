@@ -1,70 +1,72 @@
 import React from 'react';
-import spotifyLogo from '../../assets/images/spotify-logo.png';
 import { connect } from 'react-redux';
 import './Convert.css';
-import SpotifyTable from '../../components/Table/Table';
+import PlaylistTable from '../../components/PlaylistTable/PlaylistTable';
 import ConvertButton from '../../components/Button/Button';
-import {WEB_APP_URL} from "../../config/GeneralConfig/GeneralConfig";
-import * as CONSTANTS from '../../constants/Constants';
-
-import axios from 'axios';
-import LoadingWide from "../../components/LoadingWide/LoadingWide";
+import {
+	PLAYLIST_SOURCE_SPOTIFY,
+	PLAYLIST_SOURCE_YOUTUBE
+} from '../../state/playlists/playlistsSources';
+import * as playlistsActions from '../../state/playlists/playlistsActions';
+import LoadingWide from '../../components/LoadingWide/LoadingWide';
+import PlaylistTransferModal from '../PlaylistTransferModal/PlaylistTransferModal';
+import store from '../../state/store';
 
 class Convert extends React.Component {
 	constructor(props) {
 		super(props);
-
 		this.state = {
-			loading: false,
-			playlists: []
-		}
-	}
-
-	getPlaylistsFromSpotify(token){
-		this.setState({...this.state, loading: true});
-
-		let requestHeaders = {
-			spotifyAuthToken: token
+			show: false
 		};
-
-		axios.get(`${WEB_APP_URL}/api/spotify/playlists`, {headers: requestHeaders})
-			.then(response => {
-				console.log(response);
-				this.setState({...this.state, loading: false, playlists: response.data.value});
-			})
-			.catch((e) => {
-				console.log(e);
-			});
 	}
 
 	componentDidMount() {
-		const {source, sourceSet, googleToken, spotifyToken} = this.props;
-		if(!sourceSet){
+		const { source, googleToken, spotifyToken, fetchPlaylists } = this.props;
+
+		if (!source) {
 			this.props.history.push('/source-select');
 		}
 
-		if(source === CONSTANTS.PLAYLIST_SOURCE_SPOTIFY){
-			this.getPlaylistsFromSpotify(spotifyToken);
+		switch (source) {
+			case PLAYLIST_SOURCE_SPOTIFY:
+				fetchPlaylists(source, spotifyToken);
+				break;
+			case PLAYLIST_SOURCE_YOUTUBE:
+				fetchPlaylists(source, googleToken);
+				break;
+			default:
 		}
-
 	}
-
+	handleClick() {
+		//paspaudus mygtuka turetu but pakeiciamas state
+		this.setState({
+			show: true
+		});
+		console.log(this.state.show);
+		//tada page perkraunamas, tik sikart but modalas
+		this.forceUpdate();
+	}
 	render() {
+		const { isLoading } = this.props;
 		return (
 			<React.Fragment>
-				{this.state.loading ?
-				<LoadingWide/> :
-				<div className="flex-column">
-					<div className="row">
-						<h1 className="convert-heading">Select playlist to move</h1>
+				{isLoading ? (
+					<LoadingWide />
+				) : (
+					<div className="container">
+						<div className=" center-div">
+							<h1 className="convert-heading">Select playlist to move</h1>
+						</div>
+						<PlaylistTable />
+						<div className="center-div high-container">
+							<ConvertButton className="cnv-btn" onClick={this.handleClick} />
+						</div>
 					</div>
-					<div className="row">
-						<SpotifyTable playlists={this.state.playlists} />
-					</div>
-					<div className="row">
-						<ConvertButton />
-					</div>
-				</div>}
+				)}
+				<PlaylistTransferModal
+					show={this.state.show}
+					history={this.props.history}
+				/>
 			</React.Fragment>
 		);
 	}
@@ -73,10 +75,14 @@ class Convert extends React.Component {
 const mapStateToProps = state => ({
 	googleToken: state.authentication.googleAccessToken,
 	spotifyToken: state.authentication.spotifyAccessToken,
-	source: state.migration.source,
-	sourceSet: state.migration.sourceSet
+	source: state.playlists.source,
+	isLoading: state.playlists.isLoading,
+	playlists: state.playlists.playlists
 });
 
-//export default Home;
+const mapDispatchToProps = dispatch => ({
+	fetchPlaylists: (source, accessToken) =>
+		dispatch(playlistsActions.fetchPlaylists(source, accessToken))
+});
 
-export default connect(mapStateToProps)(Convert);
+export default connect(mapStateToProps, mapDispatchToProps)(Convert);

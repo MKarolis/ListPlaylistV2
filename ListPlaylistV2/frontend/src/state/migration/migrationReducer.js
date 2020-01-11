@@ -1,27 +1,29 @@
 import {
-    SET_PLAYLIST_SOURCE,
-    UNSET_PLAYLIST_SOURCE
+    START_MIGRATION, FINISH_MIGRATION, RESET_MIGRATION_STATE
 } from "./migrationActionTypes";
 
 let initialState = {
-    sourceSet: false,
-    source: null
+    isBeingConverted: false,
+    playlistConverted: false,
+    generatedGoogleLink: ''
 };
 
 const migrationReducer = (state = initialState, action) => {
     switch (action.type) {
-        case SET_PLAYLIST_SOURCE:
+        case START_MIGRATION:
             return {
                 ...state,
-                sourceSet: true,
-                source: action.payload
+                isBeingConverted: true,
+                playlistConverted: false
             };
-        case UNSET_PLAYLIST_SOURCE:
+        case FINISH_MIGRATION:
             return {
                 ...state,
-                sourceSet: false,
-                source: null
+                isBeingConverted: false,
+                playlistConverted: true
             };
+        case RESET_MIGRATION_STATE:
+            return {...initialState};
         default:
             return state;
     }
