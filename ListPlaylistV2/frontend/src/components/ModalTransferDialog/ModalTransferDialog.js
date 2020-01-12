@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LoadingSmall from '../LoadingSmall/LoadingSmall';
-import { Modal } from 'react-bootstrap';
+import {PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE} from "../../state/playlists/playlistsSources";
 
 import { WEB_APP_URL } from '../../config/GeneralConfig/GeneralConfig';
 import {
@@ -17,13 +17,18 @@ const migrate = (
 	spotifyToken,
 	googleToken,
 	id,
+	source,
 	startMigration,
 	finishMigration
 ) => {
 	startMigration();
+
+	let urlPath;
+	source === PLAYLIST_SOURCE_SPOTIFY ? urlPath = 'google/playlist' : urlPath = 'spotify/playlist';
+
 	axios
 		.post(
-			`${WEB_APP_URL}/api/google/playlist`,
+			`${WEB_APP_URL}/api/${urlPath}`,
 			{},
 			{
 				headers: {
@@ -43,7 +48,7 @@ const migrate = (
 };
 
 function ModalTransferDialog(props) {
-	const { playlist, loading, spotifyToken, googleToken, closeModal } = props;
+	const { playlist, loading, spotifyToken, googleToken, closeModal, source } = props;
 	//props.resetMigrationState();
 	return (
 		<React.Fragment>
@@ -72,6 +77,7 @@ function ModalTransferDialog(props) {
 											spotifyToken,
 											googleToken,
 											playlist.id,
+											source,
 											props.startMigration,
 											props.finishMigration
 										);
@@ -108,7 +114,7 @@ function ModalTransferDialog(props) {
 }
 const mapStateToProps = state => ({
 	playlist: state.playlists.selectedPlaylist,
-	// playlist: state.playlists.playlists[0],
+	migrationSource: state.playlists.source,
 	loading: state.migration.isBeingConverted,
 	spotifyToken: state.authentication.spotifyAccessToken,
 	googleToken: state.authentication.googleAccessToken

@@ -51,7 +51,7 @@ const mapResponseToPlaylistObject = (source, response) => {
     };
 
     let playlists = [];
-
+    console.log(response);
     switch(source){
         case PLAYLIST_SOURCE_SPOTIFY:
             response.value.map(pl => {
@@ -67,8 +67,20 @@ const mapResponseToPlaylistObject = (source, response) => {
                 playlists.push(playlistObj);
             });
             break;
-
         case PLAYLIST_SOURCE_YOUTUBE:
+            response.value.map(pl => {
+                playlistObj = {
+                    ...playlistObj,
+                    id: pl.id,
+                    imageUrl: pl.snippet.thumbnails.default__.url,
+                    title: pl.snippet.title,
+                    owner: pl.snippet.channelTitle,
+                    source: 'Youtube',
+                    songCount: 69420
+                };
+                playlists.push(playlistObj);
+            });
+            break;
     }
     return playlists;
 };
@@ -94,7 +106,6 @@ export const fetchPlaylists = (source, accessToken) => {
         axios
             .get(`${WEB_APP_URL}${sourceEndpoint}`, { headers: requestHeaders })
             .then(response => {
-                console.log(response);
 
                 let playlists = mapResponseToPlaylistObject(source, response.data);
 
