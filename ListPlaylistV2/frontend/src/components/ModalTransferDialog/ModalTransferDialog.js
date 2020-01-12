@@ -1,55 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LoadingSmall from '../LoadingSmall/LoadingSmall';
-import {PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE} from "../../state/playlists/playlistsSources";
-
-import { WEB_APP_URL } from '../../config/GeneralConfig/GeneralConfig';
-import {
-	startMigration,
-	finishMigration,
-	resetMigrationState
-} from '../../state/migration/migrationActions';
+import { migratePlaylist } from '../../state/migration/migrationActions';
 import { closeModal } from '../../state/modal/modalActions';
-
-import axios from 'axios';
-
-const migrate = (
-	spotifyToken,
-	googleToken,
-	id,
-	source,
-	startMigration,
-	finishMigration
-) => {
-	startMigration();
-
-	let urlPath;
-	source === PLAYLIST_SOURCE_SPOTIFY ? urlPath = 'google/playlist' : urlPath = 'spotify/playlist';
-
-	axios
-		.post(
-			`${WEB_APP_URL}/api/${urlPath}`,
-			{},
-			{
-				headers: {
-					spotifyAuthToken: spotifyToken,
-					googleAuthToken: googleToken,
-					playlistId: id
-				}
-			}
-		)
-		.then(response => {
-			console.log(response);
-			finishMigration();
-		})
-		.catch(e => {
-			console.log(e);
-		});
-};
 
 function ModalTransferDialog(props) {
 	const { playlist, loading, spotifyToken, googleToken, closeModal, source } = props;
-	//props.resetMigrationState();
+
+	const handleTransferClick = (e) => {
+		e.preventDefault();
+		props.migratePlaylist(spotifyToken, googleToken, playlist.id, source);
+	}
+
 	return (
 		<React.Fragment>
 			<div className="row">
@@ -72,16 +34,7 @@ function ModalTransferDialog(props) {
 							<React.Fragment>
 								<button
 									className="standart-btn transfer-control-btn"
-									onClick={() => {
-										migrate(
-											spotifyToken,
-											googleToken,
-											playlist.id,
-											source,
-											props.startMigration,
-											props.finishMigration
-										);
-									}}
+									onClick={handleTransferClick}
 								>
 									TRANSFER
 								</button>
@@ -112,17 +65,15 @@ function ModalTransferDialog(props) {
 }
 const mapStateToProps = state => ({
 	playlist: state.playlists.selectedPlaylist,
-	migrationSource: state.playlists.source,
+	source: state.playlists.source,
 	loading: state.migration.isBeingConverted,
 	spotifyToken: state.authentication.spotifyAccessToken,
 	googleToken: state.authentication.googleAccessToken
 });
 
 const mapDispatchToProps = dispatch => ({
-	startMigration: () => dispatch(startMigration()),
-	finishMigration: () => dispatch(finishMigration()),
-	resetMigrationState: () => dispatch(resetMigrationState()),
-	closeModal: () => dispatch(closeModal())
+	migratePlaylist: (spotifyToken, googleToken, id, source) => dispatch(migratePlaylist(spotifyToken, googleToken, id, source)),
+	closeModal: () => dispatch(closeModal()),
 });
 
 export default connect(
