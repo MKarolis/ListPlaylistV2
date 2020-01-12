@@ -16,10 +16,10 @@ class ModalTransferSuccessDialog extends React.Component{
         const {resetMigration, history} = this.props;
         resetMigration();
         history.replace('/source-select');
-    }
+    };
 
     render() {
-        const {logout} = this.props;
+        const {logout, generatedLink} = this.props;
         return (
             <React.Fragment>
                 <div className="row">
@@ -27,7 +27,7 @@ class ModalTransferSuccessDialog extends React.Component{
                 </div>
                 <div className="row">
                     <div className="col-sm-6 align-self-center">
-                        <a className='link-to-playlist'>
+                        <a target="_blank" rel="noopener noreferrer" className='link-to-playlist' href={generatedLink}>
                             <div className="link-card-holder">
                                 <div className="lk-cube lk-cube1"></div>
                                 <div className="lk-cube lk-cube2"></div>
@@ -54,10 +54,14 @@ class ModalTransferSuccessDialog extends React.Component{
     }
 }
 
+const mapStateToProps = (state) => ({
+    generatedLink: state.migration.generatedLink,
+});
+
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(completeLogout()),
     resetMigration: () => dispatch(resetMigrationState()),
     unsetSelectedPlaylist: () => dispatch(unsetSelectedPlaylist()),
 });
 
-export default connect(null, mapDispatchToProps)(ModalTransferSuccessDialog);
+export default connect(mapStateToProps, mapDispatchToProps)(ModalTransferSuccessDialog);

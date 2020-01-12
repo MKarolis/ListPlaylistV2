@@ -38,7 +38,7 @@ export const migratePlaylist = (spotifyToken, googleToken, id, source) => {
             )
             .then(response => {
                 console.log(response);
-                dispatch({type: FINISH_MIGRATION_SUCCESS});
+                dispatch({type: FINISH_MIGRATION_SUCCESS, payload: response});
             })
             .catch(e => {
                 console.log(e);
