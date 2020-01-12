@@ -35,7 +35,7 @@ const columnsYoutube = [
     },
     {
         title: 'Video count',
-        dataIndex: 'songCout'
+        dataIndex: 'songCount'
     },
     {
         title: 'Owner',

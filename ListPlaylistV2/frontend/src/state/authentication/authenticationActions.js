@@ -7,6 +7,7 @@
 } from './authenticationActionTypes';
 
 import {resetMigrationState} from "../migration/migrationActions";
+import {closeModal} from '../modal/modalActions';
 
 import { UNSET_PLAYLIST_SOURCE } from '../playlists/playlistsActionTypes';
 
@@ -56,6 +57,7 @@ export const completeLogout = () => {
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
         });
+        dispatch(closeModal());
         dispatch(resetMigrationState());
     };
 };
