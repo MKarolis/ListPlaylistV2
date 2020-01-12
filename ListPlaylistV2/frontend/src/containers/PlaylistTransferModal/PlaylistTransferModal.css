@@ -56,9 +56,107 @@
     margin-bottom: 40px;
 }
 
+.link-to-playlist{
+    display: block;
+    width: min-content;
+    height: min-content;
+    margin: auto;
+}
+.playlist-link-div{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: greenyellow;
+}
+.link-card-holder p{
+    text-align: center;
+    color: #FFF;
+    position: absolute;
+    right: 65px;
+    font-size: 20px;
+    top: 65px;
+}
+
+.link-card-holder{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    background-color: #1c646f;
+}
+
+.link-card-holder .lk-cube {
+    width: 33.33%;
+    height: 33.33%;
+    background-color: #0D476F;
+    float: left;
+    transform: scale3D(1, 1, 1);
+    transition: 300ms ease-in-out;
+    /*-webkit-animation: lk-cubeGridScaleDelay 1.3s 1 ease-in-out;
+    animation: lk-cubeGridScaleDelay 1.3s 1 ease-in-out;*/
+}
+.link-card-holder:hover .lk-cube{
+    transform: scale3D(0, 0, 1);
+}
+.link-card-holder .lk-cube1 {
+    transition-delay: 0.2s; }
+.link-card-holder .lk-cube2 {
+    transition-delay: 0.3s; }
+.link-card-holder .lk-cube3 {
+    transition-delay: 0.4s; }
+.link-card-holder .lk-cube4 {
+    transition-delay: 0.1s; }
+.link-card-holder .lk-cube5 {
+    transition-delay: 0.2s; }
+.link-card-holder .lk-cube6 {
+    transition-delay: 0.3s; }
+.link-card-holder .lk-cube7 {
+    transition-delay: 0s; }
+.link-card-holder .lk-cube8 {
+    transition-delay: 0.1s;
+}
+.link-card-holder .lk-cube9 {
+    -webkit-transition-delay: 0.2s;
+    transition-delay: 0.2s; }
+
+@-webkit-keyframes lk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    } 35% {
+          -webkit-transform: scale3D(0, 0, 1);
+          transform: scale3D(0, 0, 1);
+      }
+}
+
+@keyframes lk-cubeGridScaleDelay {
+    0%, 70%, 100% {
+        -webkit-transform: scale3D(1, 1, 1);
+        transform: scale3D(1, 1, 1);
+    } 35% {
+          -webkit-transform: scale3D(0, 0, 1);
+          transform: scale3D(0, 0, 1);
+      }
+}
+
+.transfer-controls-holder.success{
+    display: flex;
+}
+
 @media(max-width: 1200px){
+    .transfer-controls-holder.success{
+        display: grid;
+        width: 200px;
+    }
     .transfer-controls-holder{
         width: 180px;
+    }
+    .transfer-controls-holder.success .standart-btn.transfer-control-btn{
+        width: 190px;
+    }
+    .transfer-controls-holder.success .standart-btn.transfer-control-btn:hover{
+        width: 200px;
     }
     .standart-btn.transfer-control-btn{
         width: 160px;
@@ -109,6 +207,9 @@
 }
 
 @media(max-width: 576px) {
+    .transfer-controls-holder.success{
+        margin-top: 20px;
+    }
     .playlist-migration-tip{
         font-size: 20px;
     }
