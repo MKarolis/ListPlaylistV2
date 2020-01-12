@@ -139,7 +139,7 @@ namespace ListPLaylistV2.Controllers.Spotify
                     await _spotify.AddPlaylistTrackAsync(spotifyPlaylist.Result.Id, foundTracks.First().Uri);
             }
 
-            return Created(spotifyPlaylist.Result.Uri, null);
+            return Created("https://open.spotify.com/playlist/" + spotifyPlaylist.Result.Id, "https://open.spotify.com/playlist/"+spotifyPlaylist.Result.Id);
         }
 
         public string FormatTitle(string title)
