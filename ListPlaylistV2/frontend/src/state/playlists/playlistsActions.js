@@ -76,7 +76,7 @@ const mapResponseToPlaylistObject = (source, response) => {
                     title: pl.snippet.title,
                     owner: pl.snippet.channelTitle,
                     source: 'Youtube',
-                    songCount: 69420
+                    songCount: pl.contentDetails.itemCount
                 };
                 playlists.push(playlistObj);
             });

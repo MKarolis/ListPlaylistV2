@@ -38,7 +38,7 @@ namespace ListPLaylistV2.Controllers.Google
                 ApplicationName = this.GetType().ToString()
             });
 
-            var requestPlaylists = _youtube.Playlists.List("snippet");
+            var requestPlaylists = _youtube.Playlists.List("snippet, contentDetails");
             requestPlaylists.Mine = true;
             requestPlaylists.MaxResults = 50;
 
@@ -121,8 +121,8 @@ namespace ListPLaylistV2.Controllers.Google
                 var item = await playlistItemInsertReq.ExecuteAsync();
             }
 
-            //return Created("https://www.youtube.com/playlist?list=" + newPlaylist.Id, null); //Modified to return playlist id instead
-            return Created(newPlaylist.Id, null); //Modified to return playlist id instead
+            return Created("https://www.youtube.com/playlist?list=" + newPlaylist.Id, null); //Modified to return playlist id instead
+            //return Created(newPlaylist.Id, null); //Modified to return playlist id instead
         }
     }
 }

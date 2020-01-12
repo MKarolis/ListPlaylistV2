@@ -53,7 +53,7 @@ function ModalTransferDialog(props) {
 	return (
 		<React.Fragment>
 			<div className="row">
-				<div className="col-9 align-self-center align-content-center">
+				<div className="col-lg-9 align-self-center align-content-center">
 					<div className="playlist-info-holder">
 						<img className="playlist-modal-img" src={playlist.imageUrl} />
 						<div className="playlist-text-holder">
@@ -64,7 +64,7 @@ function ModalTransferDialog(props) {
 						</div>
 					</div>
 				</div>
-				<div className="col-3 align-self-center">
+				<div className="col-lg-3 align-self-center">
 					<div className="transfer-controls-holder">
 						{loading ? (
 							<LoadingSmall />
