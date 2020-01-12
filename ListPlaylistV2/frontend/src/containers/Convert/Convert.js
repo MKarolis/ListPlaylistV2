@@ -9,11 +9,13 @@ import {
 import * as playlistsActions from '../../state/playlists/playlistsActions';
 import LoadingWide from '../../components/LoadingWide/LoadingWide';
 import PlaylistTransferModal from '../PlaylistTransferModal/PlaylistTransferModal';
-import { openModal } from '../../state/modal/modalActions';
+import { openModal, closeModal } from '../../state/modal/modalActions';
 
 class Convert extends React.Component {
 	constructor(props) {
 		super(props);
+		props.closeModal();
+		props.unsetSelectedPlaylist();
 	}
 	componentDidMount() {
 		const {
@@ -21,14 +23,11 @@ class Convert extends React.Component {
 			googleToken,
 			spotifyToken,
 			fetchPlaylists,
-			unsetSelectedPlaylist
 		} = this.props;
 
 		if (!source) {
 			this.props.history.push('/source-select');
 		}
-
-		unsetSelectedPlaylist();
 
 		switch (source) {
 			case PLAYLIST_SOURCE_SPOTIFY:
@@ -95,7 +94,8 @@ const mapDispatchToProps = dispatch => ({
 		dispatch(playlistsActions.fetchPlaylists(source, accessToken)),
 	unsetSelectedPlaylist: () =>
 		dispatch(playlistsActions.unsetSelectedPlaylist()),
-	openModal: () => dispatch(openModal())
+	openModal: () => dispatch(openModal()),
+	closeModal: () => dispatch(closeModal()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Convert);

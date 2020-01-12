@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 
 import {completeLogout} from "../../state/authentication/authenticationActions";
 import {resetMigrationState} from "../../state/migration/migrationActions";
+import {unsetSelectedPlaylist} from "../../state/playlists/playlistsActions";
 
 class ModalTransferSuccessDialog extends React.Component{
     constructor(props){
@@ -48,7 +49,8 @@ class ModalTransferSuccessDialog extends React.Component{
 
 const mapDispatchToProps = (dispatch) => ({
     logout: () => dispatch(completeLogout()),
-    resetMigration: () => dispatch(resetMigrationState())
+    resetMigration: () => dispatch(resetMigrationState()),
+    unsetSelectedPlaylist: () => dispatch(unsetSelectedPlaylist()),
 });
 
 export default connect(null, mapDispatchToProps)(ModalTransferSuccessDialog);

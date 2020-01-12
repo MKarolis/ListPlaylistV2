@@ -16,7 +16,7 @@ class PlaylistTransferModal extends React.Component {
 		const { finishedConverting } = this.props;
 		return (
 			<Modal
-				show={this.props.show}
+				show={this.props.show && this.props.selectedPlaylist!=null}
 				onHide={this.props.onHide}
 				size="xl"
 				centered
@@ -34,7 +34,8 @@ class PlaylistTransferModal extends React.Component {
 }
 
 const mapStateToProps = state => ({
-	finishedConverting: state.migration.playlistConverted
+	finishedConverting: state.migration.playlistConverted,
+	selectedPlaylist: state.playlists.selectedPlaylist
 });
 
 export default connect(mapStateToProps)(PlaylistTransferModal);
