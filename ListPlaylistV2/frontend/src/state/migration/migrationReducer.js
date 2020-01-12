@@ -10,7 +10,7 @@ let initialState = {
     playlistConverted: false,
     hasError: false,
     error: null,
-    generatedGoogleLink: ''
+    generatedLink: null
 };
 
 const migrationReducer = (state = initialState, action) => {
@@ -28,6 +28,7 @@ const migrationReducer = (state = initialState, action) => {
                 ...state,
                 isBeingConverted: false,
                 playlistConverted: true,
+                generatedLink: action.payload.data
             };
         case FINISH_MIGRATION_ERROR:
             return {
