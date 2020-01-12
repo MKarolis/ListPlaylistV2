@@ -87,12 +87,10 @@ function ModalTransferDialog(props) {
 								</button>
 								<button
 									className="standart-btn transfer-control-btn"
-									// it's done
 									onClick={closeModal}
 								>
 									CANCEL
 								</button>{' '}
-								{/*padarysi, kad onclick būtų show=false*/}
 							</React.Fragment>
 						)}
 					</div>

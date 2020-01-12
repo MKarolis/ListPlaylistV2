@@ -16,7 +16,13 @@ class Convert extends React.Component {
 		super(props);
 	}
 	componentDidMount() {
-		const { source, googleToken, spotifyToken, fetchPlaylists, unsetSelectedPlaylist } = this.props;
+		const {
+			source,
+			googleToken,
+			spotifyToken,
+			fetchPlaylists,
+			unsetSelectedPlaylist
+		} = this.props;
 
 		if (!source) {
 			this.props.history.push('/source-select');
@@ -44,16 +50,23 @@ class Convert extends React.Component {
 		return (
 			<React.Fragment>
 				{isLoading ? (
-					<LoadingWide/>
+					<LoadingWide />
 				) : (
 					<div className="container">
 						<div className=" center-div">
 							<h1 className="convert-heading">Select playlist to move</h1>
 						</div>
-						<PlaylistTable/>
+						<div>
+							<PlaylistTable />
+						</div>
 						<div className="center-div high-container" onClick={openModal}>
 							{/*<ConvertButton active={selectedPlaylist != null} className="cnv-btn"/>*/}
-							<button disabled={selectedPlaylist == null} className="convert-btn">CONVERT</button>
+							<button
+								disabled={selectedPlaylist == null}
+								className="convert-btn"
+							>
+								CONVERT
+							</button>
 						</div>
 					</div>
 				)}
@@ -80,7 +93,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	fetchPlaylists: (source, accessToken) =>
 		dispatch(playlistsActions.fetchPlaylists(source, accessToken)),
-	unsetSelectedPlaylist: () => dispatch(playlistsActions.unsetSelectedPlaylist()),
+	unsetSelectedPlaylist: () =>
+		dispatch(playlistsActions.unsetSelectedPlaylist()),
 	openModal: () => dispatch(openModal())
 });
 
