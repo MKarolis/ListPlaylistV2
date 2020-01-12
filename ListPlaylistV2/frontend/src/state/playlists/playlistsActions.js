@@ -17,7 +17,7 @@ export const setPlaylistSource = (source) => {
     }
 };
 
-export const unsetPLaylistSource = () => {
+export const unsetPlaylistSource = () => {
     return dispatch => {
         dispatch({
             type: UNSET_PLAYLIST_SOURCE,
