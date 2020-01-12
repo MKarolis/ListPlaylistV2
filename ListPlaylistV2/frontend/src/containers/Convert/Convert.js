@@ -56,7 +56,7 @@ class Convert extends React.Component {
 						<div className=" center-div">
 							<h1 className="convert-heading">Select playlist to move</h1>
 						</div>
-						<div>
+						<div className="table-container">
 							<PlaylistTable />
 						</div>
 						<div className="center-div high-container" onClick={openModal}>
