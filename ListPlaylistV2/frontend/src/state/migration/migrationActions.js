@@ -24,8 +24,6 @@ export const migratePlaylist = (spotifyToken, googleToken, id, source) => {
                 urlPath = null;
         }
 
-        console.log(urlPath);
-
         axios
             .post(
                 `${WEB_APP_URL}/api/${urlPath}`,

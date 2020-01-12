@@ -121,7 +121,7 @@ namespace ListPLaylistV2.Controllers.Google
                 var item = await playlistItemInsertReq.ExecuteAsync();
             }
 
-            return Created("https://www.youtube.com/playlist?list=" + newPlaylist.Id, null); //Modified to return playlist id instead
+            return Created("https://www.youtube.com/playlist?list=" + newPlaylist.Id, "https://www.youtube.com/playlist?list=" + newPlaylist.Id); //Modified to return playlist id instead
             //return Created(newPlaylist.Id, null); //Modified to return playlist id instead
         }
     }
