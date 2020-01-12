@@ -32,8 +32,16 @@ body {
 .ant-table-thead > tr > th:nth-child(1) {
 	visibility: hidden;
 }
+.ant-table-thead > tr > th {
+	border: none;
+}
 .ant-table-header {
 	background: #05386b;
+}
+
+/*Keicia TĄ header'io išsikišima*/
+div.ant-table-scroll > div.ant-table-header.ant-table-hide-scrollbar {
+	margin-bottom: -10px !important;
 }
 
 .ant-table-thead > tr > th {
