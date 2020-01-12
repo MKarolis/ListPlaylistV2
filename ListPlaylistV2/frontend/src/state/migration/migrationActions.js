@@ -10,6 +10,8 @@ import { PLAYLIST_SOURCE_SPOTIFY, PLAYLIST_SOURCE_YOUTUBE } from '../playlists/p
 
 export const migratePlaylist = (spotifyToken, googleToken, id, source) => {
     return dispatch => {
+        dispatch({type: START_MIGRATION});
+
         let urlPath;
         switch (source) {
             case PLAYLIST_SOURCE_SPOTIFY:
