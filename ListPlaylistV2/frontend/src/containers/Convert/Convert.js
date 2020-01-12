@@ -10,12 +10,14 @@ import * as playlistsActions from '../../state/playlists/playlistsActions';
 import LoadingWide from '../../components/LoadingWide/LoadingWide';
 import PlaylistTransferModal from '../PlaylistTransferModal/PlaylistTransferModal';
 import { openModal, closeModal } from '../../state/modal/modalActions';
+import {resetMigrationState} from "../../state/migration/migrationActions";
 
 class Convert extends React.Component {
 	constructor(props) {
 		super(props);
 		props.closeModal();
 		props.unsetSelectedPlaylist();
+		props.resetMigrationState();
 	}
 	componentDidMount() {
 		const {
@@ -86,7 +88,7 @@ const mapStateToProps = state => ({
 	isLoading: state.playlists.isLoading,
 	playlists: state.playlists.playlists,
 	selectedPlaylist: state.playlists.selectedPlaylist,
-	isShown: state.modal.isShown
+	isShown: state.modal.isShown,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -96,6 +98,7 @@ const mapDispatchToProps = dispatch => ({
 		dispatch(playlistsActions.unsetSelectedPlaylist()),
 	openModal: () => dispatch(openModal()),
 	closeModal: () => dispatch(closeModal()),
+	resetMigrationState: () => dispatch(resetMigrationState()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Convert);
