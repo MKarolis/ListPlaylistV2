@@ -20,6 +20,10 @@ body {
 	font-weight: bold;
 	line-height: 22px;
 }
+.ant-table-body {
+	border-bottom-left-radius: 5px !important;
+	border-bottom-right-radius: 5px !important;
+}
 
 /* .ant-table .ant-table-row-level-0 > td {
 	color: #05386b;
@@ -37,11 +41,13 @@ body {
 }
 .ant-table-header {
 	background: #05386b;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
 }
 
 /*Keicia TĄ header'io išsikišima*/
 div.ant-table-scroll > div.ant-table-header.ant-table-hide-scrollbar {
-	margin-bottom: -10px !important;
+	/* margin-bottom: -12px !important; */
 }
 
 .ant-table-thead > tr > th {
@@ -86,6 +92,12 @@ div.ant-table-scroll > div.ant-table-header.ant-table-hide-scrollbar {
 	position: relative;
 	top: 15%;
 }
+.ant-radio-wrapper {
+	pointer-events: none;
+}
+.ant-radio-wrapper * {
+	pointer-events: auto;
+}
 
 /*SCROLLBAR STYLING*/
 
@@ -101,6 +113,8 @@ div::-webkit-scrollbar {
 /*the part of the track (progress bar) not covered by the handle.*/
 div::-webkit-scrollbar-track-piece {
 	background-color: transparent;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 
 /*RESPONSIVE DESIGN*/
