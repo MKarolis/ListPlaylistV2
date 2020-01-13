@@ -1,4 +1,5 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './Convert.css';
 import PlaylistTable from '../../components/PlaylistTable/PlaylistTable';
@@ -27,10 +28,6 @@ class Convert extends React.Component {
 			fetchPlaylists,
 		} = this.props;
 
-		if (!source) {
-			this.props.history.push('/source-select');
-		}
-
 		switch (source) {
 			case PLAYLIST_SOURCE_SPOTIFY:
 				fetchPlaylists(source, spotifyToken);
@@ -41,13 +38,14 @@ class Convert extends React.Component {
 			default:
 		}
 	}
-	/*DEBUGGING*/
-	// handleClick(e) {
-	// 	e.preventDefault();
-	// 	console.log('sup');
-	// }
+
 	render() {
 		const { isLoading, openModal, selectedPlaylist } = this.props;
+
+		if (!this.props.source) {
+			return <Redirect to="/source-select"/>
+		}
+
 		return (
 			<React.Fragment>
 				{isLoading ? (

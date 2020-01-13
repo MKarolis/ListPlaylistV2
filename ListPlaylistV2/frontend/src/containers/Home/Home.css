@@ -1,78 +1,82 @@
 ﻿.welcome-text {
-    margin-top: 6.5%;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 4vw;
-    line-height: 4.2vw;
-    letter-spacing: 0.05em;
-    color: #edf5e1;
-    text-align: left;
-    cursor: default;
+	margin-top: 6.5%;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 4vw;
+	line-height: 4.2vw;
+	letter-spacing: 0.05em;
+	color: #edf5e1;
+	text-align: left;
+	cursor: default;
 }
 
 .headphones-img {
-    width: 32vw;
-    height: auto;
+	width: 32vw;
+	height: auto;
 }
 
 .login-button-container {
-    display: flex;
-    justify-content: space-between;
-    height: 40%;
-    flex-wrap: wrap;
+	display: flex;
+	justify-content: space-between;
+	height: 40%;
+	flex-wrap: wrap;
 }
 
 .login-btn {
-    width: 230px;
-    height: 59px;
-    border-radius: 30px;
-    margin-top: 2vw;
-    transition: all 0.25s ease-out;
+	width: 230px;
+	height: 59px;
+	border-radius: 30px;
+	margin-top: 2vw;
+	transition: all 0.25s ease-out;
 }
 
 .login-btn:hover {
-    transform: scale(1.03);
-    opacity: 0.9;
+	transform: scale(1.03);
+	opacity: 0.9;
 }
 
 .login-button-container .google {
-    margin-left: 2vw;
+	margin-left: 2vw;
 }
 
 .login-btn:focus {
-    outline: 0;
+	outline: 0;
 }
 
 .login-btn span {
-    font-family: Montserrat, sans-serif;
-    font-weight: 500;
-    font-size: 14px;
-    display: flex;
-    align-self: center;
-    letter-spacing: 0.05em;
+	font-family: Montserrat, sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+	display: flex;
+	align-self: center;
+	letter-spacing: 0.05em;
 }
 
 .google-img,
 .spotify-img {
-    max-width: 20%;
-    margin: auto 0;
+	max-width: 20%;
+	margin: auto 0;
+}
+.button.standart-btn span {
+	font-size: 14px;
+	letter-spacing: 0.05em;
 }
 
 @media (max-width: 768px) {
-    .welcome-text {
-        text-align: center;
-        font-size: 7vw;
-        padding: 5vw;
-        line-height: 9.2vw;
-    }
+	.welcome-text {
+		text-align: center;
+		font-size: 7vw;
+		padding: 5vw;
+		line-height: 9.2vw;
+	}
 
-    .login-button-container {
-        flex-direction: column-reverse;
-        justify-content: center;
-        margin: auto;
-    }
+	.login-button-container {
+		flex-direction: column-reverse;
+		justify-content: center;
+		margin: auto;
+	}
 
-    .login-btn {
-        margin-top: 4vw;
-    }
+	.login-btn {
+		margin-top: 4vw;
+	}
 }

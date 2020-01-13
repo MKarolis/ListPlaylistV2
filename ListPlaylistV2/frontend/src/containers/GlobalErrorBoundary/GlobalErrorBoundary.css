@@ -1,0 +1,21 @@
+.error-text {
+	font-style: normal;
+	font-weight: bold;
+	font-size: 6vw;
+	line-height: 4.2vw;
+	letter-spacing: 0.05em;
+	color: #edf5e1;
+	text-align: center;
+	cursor: default;
+	margin: 0 auto;
+	line-height: 1;
+}
+
+.error-text-div {
+	width: 50%;
+	height: 100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	margin: auto;
+}

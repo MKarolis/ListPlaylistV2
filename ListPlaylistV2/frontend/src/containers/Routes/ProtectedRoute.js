@@ -9,8 +9,8 @@ class ProtectedRoute extends React.Component{
         super(props);
     }
     renderComponent(){
-        const {component: Component, loggedInSpotify, loggedInGoogle} = this.props;
-        if(loggedInSpotify && loggedInGoogle){
+        const { component: Component, loggedInSpotify, loggedInGoogle } = this.props;
+        if(loggedInSpotify && loggedInGoogle) {
             return <Component history={this.props.history} />;
         }
         return <Redirect to="/" />;
@@ -27,7 +27,8 @@ class ProtectedRoute extends React.Component{
 
 const mapStateToProps = (state) =>({
     loggedInSpotify : state.authentication.authenticatedWithSpotify,
-    loggedInGoogle: state.authentication.authenticatedWithGoogle
+    loggedInGoogle: state.authentication.authenticatedWithGoogle,
+    source: state.playlists.source,
 });
 
 export default connect(mapStateToProps)(ProtectedRoute);
