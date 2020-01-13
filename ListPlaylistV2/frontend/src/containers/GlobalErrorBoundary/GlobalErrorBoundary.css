@@ -1,0 +1,16 @@
+.error-text {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 6vw;
+    line-height: 4.2vw;
+    letter-spacing: 0.05em;
+    color: #edf5e1;
+    text-align: center;
+    cursor: default;
+}
+
+.error-text-div {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
