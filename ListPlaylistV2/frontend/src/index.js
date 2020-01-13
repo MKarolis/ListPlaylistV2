@@ -16,13 +16,13 @@ import * as serviceWorker from "./registerServiceWorker";
 const history = createBrowserHistory();
 
 ReactDOM.render(
-    <GlobalErrorBoundary>
         <Provider store={store}>
-            <PersistGate loading={null} persistor={persistor}>
-                <App history={history}/>
-            </PersistGate>
-        </Provider>
-    </GlobalErrorBoundary>,
+            <GlobalErrorBoundary>
+                <PersistGate loading={null} persistor={persistor}>
+                    <App history={history}/>
+                </PersistGate>
+            </GlobalErrorBoundary>
+        </Provider>,
     document.getElementById('root')
 );
 
