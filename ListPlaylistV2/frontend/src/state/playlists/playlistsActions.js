@@ -51,7 +51,7 @@ const mapResponseToPlaylistObject = (source, response) => {
     };
 
     let playlists = [];
-  
+
     switch(source){
         case PLAYLIST_SOURCE_SPOTIFY:
             response.value.map(pl => {
