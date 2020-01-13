@@ -21,6 +21,8 @@ class GlobalErrorBoundary extends React.Component {
             hasErrorPlaylists, hasErrorMigration
         } = this.props;
 
+        console.log(`Error: ${hasErrorPlaylists}`);
+
         if (this.state.hasError || hasErrorPlaylists || hasErrorMigration) {
             return (
                 <div className="error-text-div">
@@ -41,4 +43,4 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-export default connect()(GlobalErrorBoundary);
+export default connect(mapStateToProps, mapDispatchToProps)(GlobalErrorBoundary);
