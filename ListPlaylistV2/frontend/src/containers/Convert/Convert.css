@@ -4,8 +4,8 @@
 .convert-heading {
 	font-style: normal;
 	font-weight: bold;
-	font-size: 48px;
-	line-height: 59px;
+	font-size: 44px;
+	line-height: 54px;
 	letter-spacing: 0.05em;
 	color: #edf5e1;
 }
@@ -39,6 +39,16 @@
 	background-color: #0c616f;
 	transform: none;
 	opacity: 1;
+}
+@media(max-width: 1035px){
+	.convert-heading{
+		font-size: 28px;
+		line-height: 34px;
+	}
+	.convert-btn{
+		width: 200px;
+		margin-top: 25px;
+	}
 }
 
 .transfer-control-btn {

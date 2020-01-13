@@ -8,11 +8,11 @@ body {
 	color: black;
 }
 .spotify-table {
-	position: fixed;
+	/*position: fixed;
 	left: 50%;
 	top: 50%;
-	transform: translate(-50%, -50%);
-	width: 920px;
+	transform: translate(-50%, -50%);*/
+	width: 100%;
 	height: 349px;
 }
 .ant-table {
@@ -120,6 +120,12 @@ div::-webkit-scrollbar-track-piece {
 /*RESPONSIVE DESIGN*/
 @media (max-width: 1035px) {
 	.spotify-table {
-		width: 70%;
+		width: 100%;
+	}
+	.ant-table{
+		font-size: 14px;
+	}
+	.ant-table-thead > tr > th, .ant-table-tbody > tr > td{
+		padding: 6px 4px !important;
 	}
 }

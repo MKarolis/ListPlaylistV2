@@ -58,7 +58,7 @@ class Convert extends React.Component {
 						<div className="table-container">
 							<PlaylistTable />
 						</div>
-						<div className="center-div high-container" onClick={openModal}>
+						<div style={{margin: '100px 0'}} className="center-div" onClick={openModal}>
 							{/*<ConvertButton active={selectedPlaylist != null} className="cnv-btn"/>*/}
 							<button
 								disabled={selectedPlaylist == null}
