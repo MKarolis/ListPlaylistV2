@@ -1,5 +1,9 @@
 import React from 'react';
-import "./GlobalErrorBoundary.css";
+import './GlobalErrorBoundary.css';
+import { connect } from 'react-redux';
+import * as playlistsActions from "../../state/playlists/playlistsActions";
+import {closeModal, openModal} from "../../state/modal/modalActions";
+import {resetMigrationState} from "../../state/migration/migrationActions";
 
 class GlobalErrorBoundary extends React.Component {
     constructor(props) {
@@ -13,7 +17,11 @@ class GlobalErrorBoundary extends React.Component {
     }
 
     render() {
-        if (!this.state.hasError) {
+        const {
+            hasErrorPlaylists, hasErrorMigration
+        } = this.props;
+
+        if (this.state.hasError || hasErrorPlaylists || hasErrorMigration) {
             return (
                 <div className="error-text-div">
                     <h1 className="error-text">Something went wrong :(</h1>
@@ -24,4 +32,13 @@ class GlobalErrorBoundary extends React.Component {
     }
 }
 
-export default GlobalErrorBoundary;
+const mapStateToProps = state => ({
+    hasErrorPlaylists: state.playlists.hasError,
+    hasErrorMigration: state.migration.hasError,
+});
+
+const mapDispatchToProps = dispatch => ({
+
+});
+
+export default connect()(GlobalErrorBoundary);
