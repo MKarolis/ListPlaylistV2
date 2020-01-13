@@ -40,3 +40,7 @@
 	transform: none;
 	opacity: 1;
 }
+
+.transfer-control-btn {
+	letter-spacing: 0.05em;
+}
