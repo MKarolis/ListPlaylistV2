@@ -9,6 +9,7 @@ import reducers from "./reducers";
 const persistConfig = {
     key: 'primary',
     storage,
+    blacklist: ['playlists', 'migration'],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);
@@ -17,10 +18,5 @@ const store = createStore(persistedReducer, compose(applyMiddleware(thunk),windo
 
 export const persistor = persistStore(store);
 
-/*
-const store = createStore(reducers, compose(
-    applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-));*/
 
 export default store;
