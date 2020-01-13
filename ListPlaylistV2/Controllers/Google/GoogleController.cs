@@ -93,7 +93,7 @@ namespace ListPLaylistV2.Controllers.Google
             // Create playlist
             var newPlaylist = new Playlist();
             newPlaylist.Snippet = new PlaylistSnippet();
-            newPlaylist.Snippet.Title = spotifyPlaylistName;
+            newPlaylist.Snippet.Title = spotifyPlaylistName.Replace('<', 'A').Replace('>', 'B');
             newPlaylist.Snippet.Description = "";
             newPlaylist.Status = new PlaylistStatus();
             newPlaylist.Status.PrivacyStatus = "public";
@@ -110,6 +110,11 @@ namespace ListPLaylistV2.Controllers.Google
                 req.Order = SearchResource.ListRequest.OrderEnum.Relevance;
 
                 var resp = await req.ExecuteAsync();
+
+                if(resp.Items.Count == 0)
+                {
+                    continue;
+                }
 
                 var newPlaylistItem = new PlaylistItem();
                 newPlaylistItem.Snippet = new PlaylistItemSnippet();
