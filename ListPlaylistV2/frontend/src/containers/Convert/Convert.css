@@ -25,6 +25,11 @@
 	transition: all 200ms ease-in-out;
 	position: relative;
 	top: 90%;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 29px;
+	text-align: center;
+	letter-spacing: 0.15em;
 }
 .convert-btn:hover {
 	transform: scale(1.03);
