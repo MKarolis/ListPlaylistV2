@@ -1,13 +1,12 @@
 ﻿import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
-import {persistStore, persistReducer} from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
-
 import reducers from "./reducers";
 
 const persistConfig = {
-    key: 'primary',
+    key: 'listplaylist',
     storage,
     blacklist: ['playlists', 'migration'],
 };
