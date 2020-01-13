@@ -17,13 +17,11 @@ const history = createBrowserHistory();
 
 ReactDOM.render(
         <Provider store={store}>
-
-                <PersistGate loading={null} persistor={persistor}>
-                    <GlobalErrorBoundary>
+            <PersistGate loading={null} persistor={persistor}>
+                <GlobalErrorBoundary history={history}>
                     <App history={history}/>
-                    </GlobalErrorBoundary>
-                </PersistGate>
-
+                </GlobalErrorBoundary>
+            </PersistGate>
         </Provider>,
     document.getElementById('root')
 );

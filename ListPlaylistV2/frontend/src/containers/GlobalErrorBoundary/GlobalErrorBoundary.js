@@ -1,9 +1,6 @@
 import React from 'react';
 import './GlobalErrorBoundary.css';
 import { connect } from 'react-redux';
-import * as playlistsActions from "../../state/playlists/playlistsActions";
-import {closeModal, openModal} from "../../state/modal/modalActions";
-import {resetMigrationState} from "../../state/migration/migrationActions";
 
 class GlobalErrorBoundary extends React.Component {
     constructor(props) {
@@ -21,15 +18,17 @@ class GlobalErrorBoundary extends React.Component {
             hasErrorPlaylists, hasErrorMigration
         } = this.props;
 
-        console.log(`Error: ${hasErrorPlaylists}`);
-
         if (this.state.hasError || hasErrorPlaylists || hasErrorMigration) {
+            this.props.history.push("/");
             return (
                 <div className="error-text-div">
                     <h1 className="error-text">Something went wrong :(</h1>
                 </div>
             );
         }
+
+        console.log("wut");
+
         return this.props.children;
     }
 }
